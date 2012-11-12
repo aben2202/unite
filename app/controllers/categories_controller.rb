@@ -28,6 +28,12 @@ before_filter :admin_user, only: [:new, :edit, :update, :destroy]
 
   def update
     @category = Category.find(params[:id])
+    if @category.update_attributes(params[:category])
+      flash[:success] = "Successfully updated category: #{@category.name}"
+      redirect_to categories_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy
