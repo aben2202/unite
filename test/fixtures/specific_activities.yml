@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  description: MyString
+  when: 2012-11-11 15:48:35
+  min_participants: 1
+  max_participants: 1
+  its_on: false
+
+two:
+  description: MyString
+  when: 2012-11-11 15:48:35
+  min_participants: 1
+  max_participants: 1
+  its_on: false

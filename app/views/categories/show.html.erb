@@ -1,0 +1,5 @@
+<%= form_for @category do |f| %>
+  <%= render 'fields', f: f %>
+
+  <div><%= f.submit "Save Category", class: "btn btn-large btn-primary" %></div>
+<% end %>

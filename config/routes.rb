@@ -1,11 +1,12 @@
 Unite::Application.routes.draw do
-
   devise_for :users
 
-resources :user
+  resources :users
+  resources :categories
+  resources :activities
 
 
-root to: "users#index"
+  root to: "activities#index"
 
 
 
