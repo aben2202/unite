@@ -13,6 +13,7 @@ before_filter :admin_user, only: [:new, :edit, :update, :destroy]
     @new_category = Category.new(params[:category])
     if @new_category.save
       flash[:success] = "Successfully created category: #{@new_category.name}"
+      redirect_to categories_path
     else
       flash[:error] = "there was a problem"
     end
@@ -39,7 +40,7 @@ before_filter :admin_user, only: [:new, :edit, :update, :destroy]
   def destroy
     Category.find(params[:id]).destroy
     flash[:success] = "Category removed"
-    redirect_to root
+    redirect_to categories_path
   end
 
   private

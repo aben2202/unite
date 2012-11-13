@@ -18,7 +18,11 @@
       <tr>
         <td><%= link_to category.id, category_path(category) %></td>
         <td><%= category.name %></td>
-        <td><%= category.parent_category_id %></td>
+        <% if category.parent_category_id != nil %>
+          <td><%= Category.find(category.parent_category_id).name %></td>
+        <% else %>
+          <td><%= category.parent_category_id %></td>
+        <% end %>
         <td><%= category.image_path %></td>
         <td><%=l category.created_at %></td>
         <td>

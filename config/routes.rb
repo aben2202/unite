@@ -3,7 +3,9 @@ Unite::Application.routes.draw do
 
   resources :users
   resources :categories
-  resources :activities
+  resources :activities do
+    get :specific_index
+  end
 
 
   root to: "activities#index"

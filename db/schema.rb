@@ -11,25 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121111225524) do
+ActiveRecord::Schema.define(:version => 20121113063021) do
 
-  create_table "categories", :force => true do |t|
-    t.string   "name"
-    t.integer  "parent_category_id"
-    t.string   "image_path"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
-  create_table "generic_activities", :force => true do |t|
-    t.string   "name",        :default => "", :null => false
-    t.string   "image_path"
-    t.integer  "category_id",                 :null => false
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-  end
-
-  create_table "specific_activities", :force => true do |t|
+  create_table "activities", :force => true do |t|
     t.string   "description"
     t.datetime "when",             :null => false
     t.integer  "min_participants", :null => false
@@ -37,6 +21,15 @@ ActiveRecord::Schema.define(:version => 20121111225524) do
     t.boolean  "its_on"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.integer  "category_id"
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.integer  "parent_category_id"
+    t.string   "image_path"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "users", :force => true do |t|
