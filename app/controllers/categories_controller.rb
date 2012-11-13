@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
 before_filter :admin_user, only: [:new, :edit, :update, :destroy]
+before_filter :check_for_parent_leaf [:create]
 
   def index
     @categories = Category.all
@@ -47,5 +48,12 @@ before_filter :admin_user, only: [:new, :edit, :update, :destroy]
 
     def admin_user
       redirect_to(root_path) unless current_user.admin?
+    end
+
+    def check_for_parent_leaf
+      if Category.find(params[:parent_category_id]).leaf?
+        flash[:error] = "Cannot create subcategory for a leaf"
+        redirect_to new_category_path
+      end
     end
 end

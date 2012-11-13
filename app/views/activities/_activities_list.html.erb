@@ -1,0 +1,28 @@
+<%- model_class = Activity -%>
+<div class="page-header">
+  <% if @current_directory %>
+    <h2> Activities - <%= @current_directory.name.capitalize %></h2>
+  <% else %>
+    <h2> Activities </h2>
+  <% end %>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @activities.each do |activity| %>
+	  <tr>
+	    <td><%= link_to "#{activity.title}", activity_path(activity) %></td>
+	  </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if signed_in? %>
+	<%= link_to t('.new', :default => t("helpers.links.new")),
+	            new_activity_path,
+	            :class => 'btn btn-primary' %>
+<% end %>

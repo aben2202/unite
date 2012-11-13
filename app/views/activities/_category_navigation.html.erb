@@ -1,0 +1,31 @@
+<%- model_class = Category -%>
+<div class="page-header">
+  <h2><%=t '.title', :default => model_class.model_name.human.pluralize %></h2>
+</div>
+<% if @parent_directory %>
+	<%= link_to "Back to #{@parent_directory.name}", 
+				activities_path(category_id: @parent_directory.id) %>
+<% end %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <% if @current_directory %>
+      	<th><%= model_class.human_attribute_name(@current_directory.name) %></th>
+      <% else %>
+      	<th>Main</th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= link_to "#{category.name}", activities_path(category_id: category) %>
+        	<%= "  (#{category_activities(category.id)})" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_category_path,
+            :class => 'btn btn-primary' %>
