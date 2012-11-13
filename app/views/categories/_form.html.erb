@@ -17,6 +17,12 @@
       <%= f.text_field :image_path, :class => 'text_field' %>
     </div>
   </div>
+  <div class="control-group">
+    <%= f.label :leaf, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :leaf, :class => 'check_box' %>
+    </div>
+  </div>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

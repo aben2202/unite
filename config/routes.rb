@@ -8,7 +8,7 @@ Unite::Application.routes.draw do
   end
 
 
-  root to: "activities#index"
+  root to: "activities#index", category_id: 13
 
 
 
