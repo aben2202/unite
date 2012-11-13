@@ -4,14 +4,14 @@ module ActivitiesHelper
 		# debugger
 		current_category = Category.find(category_id)
 		if current_category.leaf # base case
-			return Activity.count(conditions: "category_id = #{current_category.id}")
+			return Activity.where(category_id: current_category.id)
 		else
 			subcategories = Category.where(parent_category_id: category_id)
-			subtotal = 0
+			activities = []
 			subcategories.each do |subc|
-				subtotal += category_activities(subc.id)
+				activities += category_activities(subc.id)
 			end
-			return subtotal
+			return activities
 		end
 	end
 end

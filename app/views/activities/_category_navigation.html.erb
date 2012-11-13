@@ -10,7 +10,7 @@
   <thead>
     <tr>
       <% if @current_directory %>
-      	<th><%= model_class.human_attribute_name(@current_directory.name) %></th>
+      	<th><%= "#{model_class.human_attribute_name(@current_directory.name)} (#{category_activities(@current_directory.id).size})" %></th>
       <% else %>
       	<th>Main</th>
       <% end %>
@@ -20,12 +20,14 @@
     <% @categories.each do |category| %>
       <tr>
         <td><%= link_to "#{category.name}", activities_path(category_id: category) %>
-        	<%= "  (#{category_activities(category.id)})" %></td>
+        	<%= " (#{category_activities(category.id).size})" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_category_path,
-            :class => 'btn btn-primary' %>
+<% if signed_in? and current_user.admin? %>
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_category_path,
+              :class => 'btn btn-primary' %>
+<% end %>

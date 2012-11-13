@@ -1,5 +1,11 @@
 <%= form_for @activity, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
+    <%= f.label :title, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
     <%= f.label :description, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :description, :class => 'text_field' %>
@@ -14,25 +20,25 @@
   <div class="control-group">
     <%= f.label :min_participants, :class => 'control-label' %>
     <div class="controls">
-      <%= f.number_field :min_participants, :class => 'number_field', default: 0 %>
+      <%= f.number_field :min_participants, :class => 'number_field', :in => 0..1000000, default: 0 %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :max_participants, :class => 'control-label' %>
     <div class="controls">
-      <%= f.number_field :max_participants, :class => 'number_field', default: 0 %>
+      <%= f.number_field :max_participants, :class => 'number_field', :in => 0..1000000, default: 0 %>
     </div>
   </div>
-  <!-- <div class="control-group">
-    <%= f.label :its_on, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.check_box :its_on, :class => 'check_box' %>
-    </div>
-  </div> -->
   <div class="control-group">
     <%= f.label :category_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.collection_select :category_id, Category.order('name ASC').where(leaf: true), :id, :name, :class => 'number_field' %>
+      <% if @category %> 
+        <%= f.collection_select :category_id, Category.order('name ASC').where(leaf: true), :id, :name, 
+            :class => 'number_field', selected: @category.id %>
+      <% else %> 
+        <%= f.collection_select :category_id, Category.order('name ASC').where(leaf: true), :id, :name, 
+            :class => 'number_field' %>
+      <% end %>
     </div>
   </div>
 

@@ -9,20 +9,32 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th><%= model_class.human_attribute_name(:category) %></th>
       <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:when) %></th>
     </tr>
   </thead>
   <tbody>
     <% @activities.each do |activity| %>
 	  <tr>
+      <td><%= Category.find(activity.category_id).name %>
 	    <td><%= link_to "#{activity.title}", activity_path(activity) %></td>
+      <td><%= activity.when.to_s %></td>
 	  </tr>
     <% end %>
   </tbody>
 </table>
 
+ <%= will_paginate @activities %>
+
 <% if signed_in? %>
-	<%= link_to t('.new', :default => t("helpers.links.new")),
-	            new_activity_path,
-	            :class => 'btn btn-primary' %>
+  <% if @current_directory %>
+  	<%= link_to t('.new', :default => t("helpers.links.new")),
+  	            new_activity_path(category_id: @current_directory.id),
+  	            :class => 'btn btn-primary' %>
+  <% else %>
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_activity_path(),
+                :class => 'btn btn-primary' %>
+  <% end %>
 <% end %>
