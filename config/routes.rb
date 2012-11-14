@@ -3,9 +3,8 @@ Unite::Application.routes.draw do
 
   resources :users
   resources :categories
-  resources :activities do
-    get :specific_index
-  end
+  resources :activities 
+  resources :participations, only: [:create, :destroy]
 
 
   root to: "activities#index", category_id: 13

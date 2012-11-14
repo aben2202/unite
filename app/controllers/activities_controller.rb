@@ -1,9 +1,13 @@
 class ActivitiesController < ApplicationController
+  before_filter :creator, only: [:edit, :update, :destroy]
+  before_filter :user_is_signed_in, only: [:new, :create, :edit, :update, :destroy]
+
   def index
     #the params[:category_id] is the id of the category that was just clicked on
     # @activities = Activity.where(category_id: params[:category_id]).paginate(per_page: 5, page: params[:page])
-    @activities = category_activities(params[:category_id]).paginate(per_page: 5, page: params[:page])
-    @categories = Category.where(parent_category_id: params[:category_id])
+    all_category_ids = get_all_subcategory_ids(params[:category_id]) 
+    @activities = Activity.where(category_id: all_category_ids).paginate(per_page: 10, page: params[:page])
+    @categories = Category.order("name").where(parent_category_id: params[:category_id])
     if params[:category_id]
       @current_directory = Category.find(params[:category_id])
       parent_directory_id = @current_directory.parent_category_id
@@ -21,7 +25,6 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    debugger
     @activity = Activity.new(params[:activity])
     if @activity.save
       flash[:success] = "Successfully created activity: #{@activity.title}"
@@ -39,11 +42,34 @@ class ActivitiesController < ApplicationController
   end
 
   def edit
+    @activity = Activity.find(params[:id])
   end
 
   def update
+    debugger
+    @activity = Activity.find(params[:id])
+    if @activity.update_attributes(params[:activity])
+      flash[:success] = "Activity updated"
+      redirect_to root_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy
+    Activity.find(params[:id]).destroy
+    flash[:success] = "Activity deleted"
+    redirect_to root_path
   end
+
+  public
+    def creator
+      activity = Activity.find(params[:id])
+      creator = User.find(activity.creator_id)
+      redirect_to(root_path) unless creator == current_user
+    end
+
+    def user_is_signed_in
+      redirect_to(root_path) unless signed_in?
+    end
 end

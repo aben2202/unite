@@ -6,7 +6,12 @@
     <h2> Activities </h2>
   <% end %>
 </div>
-<table class="table table-striped">
+<div>
+  <%= image_tag("green.png", height: 25, width: 25) %>
+  IT'S ON: open <br />
+  <%= image_tag("red.png", height: 25, width: 25) %>
+  IT'S ON: full</div>
+<table class="table">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:category) %></th>
@@ -16,8 +21,14 @@
   </thead>
   <tbody>
     <% @activities.each do |activity| %>
-	  <tr>
-      <td><%= Category.find(activity.category_id).name %>
+	  <tr BGCOLOR=<%= get_activity_row_color(activity) %>>
+    <!-- <tr class=<%= get_activity_row_class(activity) %>> -->
+      <td>
+        <div>
+          <%= get_activity_category_image(activity) %>
+          <%= Category.find(activity.category_id).name %>
+        </div>
+      </td>
 	    <td><%= link_to "#{activity.title}", activity_path(activity) %></td>
       <td><%= activity.when.to_s %></td>
 	  </tr>

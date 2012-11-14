@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
   				  :first_name, :last_name, :username, :age, :zipcode		#general info
   				 
 
-  # has_many :subscriptions
-  # has_many :activities, through: :subscriptions
+  has_many :participations, foreign_key: "user_id"
+  has_many :activities, through: :participations
 
   #validations
   validates :username,  			presence: true
@@ -19,4 +19,16 @@ class User < ActiveRecord::Base
   validates :zipcode,   			presence: true
 
   # attr_accessible :title, :body
+
+  def participating?(activity)
+    self.participations.find_by_activity_id(activity.id)
+  end
+
+  def participate!(activity)
+    self.participations.create!(activity_id: activity.id)
+  end
+
+  def quit!(activity)
+    self.participations.find_by_activity_id(activity.id).destroy
+  end
 end
