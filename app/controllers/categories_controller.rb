@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_filter :check_for_parent_leaf , only: [:create]
 
   def index
-    @categories = Category.all
+    @categories = Category.order(:name).paginate(per_page: 15, page: params[:page])
   end
 
   def new
