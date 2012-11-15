@@ -6,6 +6,8 @@ class Activity < ActiveRecord::Base
   has_many :participations, foreign_key: "activity_id"
   has_many :users, through: :participations
 
+  belongs_to :group
+
   validates :title,				presence: true
   validates :min_participants, 	presence: true
   validates :when,				presence: true

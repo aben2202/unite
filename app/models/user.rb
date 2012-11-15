@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
   validates :age,       			presence: true
   validates :zipcode,   			presence: true
 
+  after_create :add_to_public_group
+
   # attr_accessible :title, :body
 
   #Activity association methods ##############################################
@@ -51,4 +53,9 @@ class User < ActiveRecord::Base
     self.group_memberships.find_by_group_id(group.id).destroy
   end
 
+  private
+    def add_to_public_group
+      public_group = Group.find(1)
+      self.join_group!(public_group)
+    end
 end

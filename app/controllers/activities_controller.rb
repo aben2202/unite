@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
-  before_filter :creator, only: [:edit, :update, :destroy]
-  before_filter :user_is_signed_in, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :activity_creator, only: [:edit, :update, :destroy]
+  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     #the params[:category_id] is the id of the category that was just clicked on
@@ -26,6 +26,7 @@ class ActivitiesController < ApplicationController
 
   def create
     @activity = Activity.new(params[:activity])
+    @activity.creator_id = current_user.id
     if @activity.save
       flash[:success] = "Successfully created activity: #{@activity.title}"
       redirect_to activities_path(category_id: @activity.category_id)
@@ -61,14 +62,10 @@ class ActivitiesController < ApplicationController
     redirect_to root_path
   end
 
-  public
-    def creator
+  private
+    def activity_creator
       activity = Activity.find(params[:id])
       creator = User.find(activity.creator_id)
       redirect_to(root_path) unless creator == current_user
-    end
-
-    def user_is_signed_in
-      redirect_to(root_path) unless signed_in?
     end
 end

@@ -5,6 +5,8 @@ Unite::Application.routes.draw do
   resources :categories
   resources :activities 
   resources :participations, only: [:create, :destroy]
+  resources :groups  
+  resources :group_memberships, only: [:create, :destroy]  
 
 
   root to: "activities#index", category_id: 13

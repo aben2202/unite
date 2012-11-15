@@ -36,10 +36,14 @@ module ActivitiesHelper
 
 	def get_activity_row_class(activity)
 		if activity.its_on? 
-          "its-on"
-        else
-          "its-off"
-        end
+			if activity.users.count < activity.max_participants
+	          "its-on-open"
+	        else
+	          "its-on-full"
+	        end
+	    else
+	    	"its-off"
+	    end
     end
 
     def get_activity_row_color(activity)

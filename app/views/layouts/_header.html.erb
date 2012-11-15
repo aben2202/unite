@@ -1,10 +1,19 @@
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "Activities", root_path %>
-      <% if signed_in? && current_user.admin? %>
-        <%= link_to "Categories", categories_path %>
-      <% end %>
+      <div class="nav pull-left">
+        <div class="span1">
+          <%= link_to "Activities", root_path %>
+        </div>
+        <div class="span1 offset1">
+          <%= link_to "Groups", groups_path %>
+        </div>
+        <div class="span1 offset1">
+          <% if signed_in? && current_user.admin? %>
+            <%= link_to "Categories", categories_path %>
+          <% end %>
+        </div>
+      </div>
       <nav>
         <ul class="nav pull-right">
           <% if signed_in? %>
