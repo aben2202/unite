@@ -1,0 +1,4 @@
+<%= form_for(current_user.group_memberships.find_by_group_id(group.id),
+            html: { method: :delete, class: "inline-form" }) do |f| %>
+  <%= image_submit_tag "leave.png", class: "subscribe-button inline", title: "leave group" %>
+<% end %>

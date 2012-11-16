@@ -1,0 +1,5 @@
+<%= form_for(current_user.group_memberships.build(group_id: group.id),
+	html: { class: "inline-form" }) do |f| %>
+  <div><%= f.hidden_field :group_id %></div>
+  <%= image_submit_tag "join.jpg", class: "subscribe-button inline", title: "join" %>
+<% end %>

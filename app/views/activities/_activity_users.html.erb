@@ -1,0 +1,33 @@
+<%- model_class = User -%>
+<div class="main-area">
+  <span>
+    <h2> Participants (<%= "#{@activity.users.count}" %>)
+      <% if signed_in? %>
+        <% if !current_user.participating?(@activity) %>
+          <% if @activity.users.count < @activity.max_participants %>
+            <%= render 'join_button' %>
+          <% else %>
+            <p>This activity is full</p>
+          <% end %>
+        <% else %>
+          <%= render 'drop_button' %>
+        <% end %>
+      <% end %>
+    </h2>
+  </span>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= model_class.human_attribute_name(:username) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @activity.users.each do |user| %>
+  	  <tr>
+      	<td><%= link_to "#{user.username}", user_path(user) %></td>
+  	  </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

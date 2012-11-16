@@ -1,0 +1,22 @@
+<%- model_class = User -%>
+<div id="user-info">
+	<div class="row">
+		<div class="span8">
+			<div class="main-area">
+			  <h3>General Info: <%= @user.username %></h3>
+				<%= render :partial => 'form' %>
+			</div>
+		</div>
+	</div>
+</div>
+<br />
+<div class="row">
+	<div class="span4">
+		<div id="user-groups", class="main-area">
+			<%= render 'user_groups' %>
+		</div>
+	</div>
+	<div class="span4 main-area" %>
+		<%= render 'user_subscriptions' %>
+	</div>
+</div>

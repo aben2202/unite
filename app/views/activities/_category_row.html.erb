@@ -1,0 +1,21 @@
+<td><%= link_to "#{category.name}", activities_path(category_id: category) %>
+  <%= " (#{category_activities(category.id).size})" %>
+  <span id="category-icon">
+    <% if signed_in? %>
+      <% if current_user.subscribing?(category) %>
+        <!-- if they are subscribing, we show the green image and make it unsubscribe if clicked -->
+        <%= form_for(current_user.subscriptions.find_by_category_id(category.id),
+                    html: { method: :delete, class: "inline-form" }) do |f| %>
+          <%= image_submit_tag "is_subscribing.png", class: "subscribe-button", title: "unsubscribe" %>
+        <% end %>
+      <% else %>
+        <!-- if they are not subscribing, we show the grey image and make it subscribe if clicked -->
+        <%= form_for(current_user.subscriptions.build(category_id: category.id),
+                    html: { class: "inline-form"}) do |f| %>
+          <div><%= f.hidden_field :category_id %></div>
+          <%= image_submit_tag "is_not_subscribing.png", class: "subscribe-button", title: "subscribe" %>
+        <% end %>        
+      <% end %>
+    <% end %>
+  </span>
+</td>

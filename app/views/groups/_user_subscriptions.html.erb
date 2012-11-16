@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h3>Subscriptions</h3>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <% if signed_in? && @user == current_user %>
+      	<th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.subscriptions.each do |group| %>
+	    <tr class=<%= get_group_row_class(group) %>>
+	      <td><%= group.name %></td>
+          <td>
+          	<% if signed_in? && @user == current_user && group.id != 1 %>
+	            <%= form_for(current_user.group_memberships.find_by_group_id(group.id),
+	            	html: { method: :delete, class: "inline-form" }) do |f| %>
+					<%= f.submit "LEAVE", class: "btn btn-mini" %>
+				<% end %>
+			<% end %>
+          </td>
+	    </tr>
+	<% end %>
+  </tbody>
+</table>

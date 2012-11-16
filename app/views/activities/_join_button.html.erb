@@ -1,0 +1,4 @@
+<%= form_for(current_user.participations.build(activity_id: @activity.id)) do |f| %>
+  <div><%= f.hidden_field :activity_id %></div>
+  <%= f.submit "JOIN ACTIVITY", class: "btn btn-large btn-primary" %>
+<% end %>

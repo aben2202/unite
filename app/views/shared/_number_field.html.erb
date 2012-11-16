@@ -1,0 +1,5 @@
+<% if @user == current_user %>
+	<%= f.number_field field, :class => 'number_field' %>
+<% else %>
+	<%= f.number_field field, :class => 'number_field', readonly: true %>
+<% end %>

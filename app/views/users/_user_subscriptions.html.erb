@@ -1,0 +1,36 @@
+<div class="page-header">
+  <h3>Subscriptions</h3>
+</div>
+
+<% if @user.subscriptions.count > 0 %>
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th>Name</th>
+	      <% if signed_in? && @user == current_user %>
+	      	<th><%=t '.actions', :default => t("helpers.actions") %></th>
+	      <% end %>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <% @user.subscriptions.each do |sub| %>
+		    <tr>
+		      <% category = Category.find(sub.category_id) %>
+		      <td><%= category.name %></td>
+	          <td>
+	          	<% if signed_in? and current_user == @user %>
+	          	  <%= form_for(@user.subscriptions.find_by_category_id(category.id),
+	                    html: { method: :delete, class: "inline-form" }) do |f| %>
+	          		<%= image_submit_tag "is_subscribing.png", class: "subscribe-button", title: "unsubscribe" %>
+	        	  <% end %>
+	        	<% end %>
+	          </td>
+		    </tr>
+		  <% end %>
+	  </tbody>
+	</table>
+<% elsif @user == current_user %>
+	<p>You currently have no subscriptions.  To subscribe, go to the activities page and browse through the categories.  When you find one you are interested in, click on the rss icon next to it.  You will then be subscribed.  And yes, you can unsubscribe at anytime.</p>
+<% else %>
+	<p>This user has no subscriptions.</p>
+<% end %>
