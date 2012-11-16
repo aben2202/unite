@@ -4,7 +4,7 @@ class Group < ActiveRecord::Base
   has_many :group_memberships, foreign_key: "group_id"
   has_many :members, through: :group_memberships
 
-  has_many :activities
+  belongs_to :activity
 
   validates :name, 			presence: true
   validates :creator_id, 	presence: true

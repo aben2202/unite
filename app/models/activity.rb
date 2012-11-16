@@ -6,7 +6,7 @@ class Activity < ActiveRecord::Base
   has_many :participations, foreign_key: "activity_id"
   has_many :users, through: :participations
 
-  belongs_to :group
+  has_many :groups
 
   after_create :auto_add_creator_to_participants
 
