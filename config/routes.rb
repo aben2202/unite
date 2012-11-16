@@ -3,6 +3,7 @@ Unite::Application.routes.draw do
 
   resources :users
   resources :categories
+  resources :subscriptions, only: [:create, :destroy]
   resources :activities 
   resources :participations, only: [:create, :destroy]
   resources :groups  

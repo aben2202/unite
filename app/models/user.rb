@@ -57,6 +57,24 @@ class User < ActiveRecord::Base
     self.group_memberships.find_by_group_id(group.id).destroy
   end
 
+
+  #Category subscription methods ###########################################
+  def subscribing?(category)
+    self.subscriptions.find_by_category_id(category.id)
+  end
+
+  def subscribe!(category)
+    self.subscriptions.create!(category_id: category.id)
+
+    #we need to subscribe them to all subcategories as well
+  end
+
+  def unsubscribe!(category)
+    self.subscriptions.find_by_category_id(category.id).destroy
+
+    #we need to unsubscribe them from all subcategories as well
+  end
+
   private
     def add_to_public_group
       public_group = Group.find(1)

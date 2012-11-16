@@ -1,33 +1,33 @@
 <%- model_class = Category -%>
-<div class="page-header">
-  <h2><%=t '.title', :default => model_class.model_name.human.pluralize %></h2>
-</div>
-<% if @parent_directory %>
-	<%= link_to "Back to #{@parent_directory.name}", 
-				activities_path(category_id: @parent_directory.id) %>
-<% end %>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <% if @current_directory %>
-      	<th><%= "#{model_class.human_attribute_name(@current_directory.name)} (#{category_activities(@current_directory.id).size})" %></th>
-      <% else %>
-      	<th>Main</th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% @categories.each do |category| %>
-      <tr>
-        <td><%= link_to "#{category.name}", activities_path(category_id: category) %>
-        	<%= " (#{category_activities(category.id).size})" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<% if signed_in? and current_user.admin? %>
-  <%= link_to t('.new', :default => t("helpers.links.new")),
-              new_category_path,
-              :class => 'btn btn-primary' %>
-<% end %>
+<div class="main-area">
+  <h2>Categories</h2><br />
+  <% if @parent_directory %>
+  	<%= link_to "Back to #{@parent_directory.name}", 
+  				activities_path(category_id: @parent_directory.id) %>
+  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <% if @current_directory %>
+        	<th><%= "#{model_class.human_attribute_name(@current_directory.name)} (#{category_activities(@current_directory.id).size})" %></th>
+        <% else %>
+        	<th>Main</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @categories.each do |category| %>
+        <tr>
+          <%= render partial: "category_row", locals: { category: category } %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <% if signed_in? and current_user.admin? %>
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_category_path,
+                :class => 'btn btn-primary' %>
+  <% end %>
+</div>

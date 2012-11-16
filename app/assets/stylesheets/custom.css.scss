@@ -1,4 +1,79 @@
 body{
   padding: 25px;
   padding-top: 75px;
+  background-color: rgb(200,200,200);
+}
+
+#user-info{
+	text-align: center;
+}
+
+
+
+$pastel_green: rgb(200,255,200);
+$pastel_red: rgb(255,200,200);
+$pastel_blue: rgb(200,255,255);
+
+.users-header{
+	display: -webkit-box;
+	-webkit-box-orient:horizontal;
+}
+
+.its-on-open{
+	background-color: $pastel_green;
+}
+
+.its-on-full{
+	background-color: $pastel_green;
+}
+
+.its-off{
+	background-color: white;
+}
+
+.open-spots{
+	font-weight: bold;
+	text-align: center;
+}
+
+#custom-header{
+	background-color: rgb(200,200,100)
+}
+
+#category-icon{
+	float: right;
+}
+
+.subscribe-button{
+	height: 25px;
+	width: 25px;
+	display: inline;
+}
+
+.inline{
+	display: inline;
+}
+
+.main-area{
+	background-color: white;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	padding: 10px 10px 10px 10px;
+
+	h2 {
+		text-align: center;
+		border-bottom: 2px solid #EEEEEE;
+	}
+}
+
+.activity-legend{
+	margin: 0 auto;
+}
+
+.inline-form{
+	display: inline;
+}
+
+.group-member{
+	font-weight: bold;
 }
