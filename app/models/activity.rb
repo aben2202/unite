@@ -8,7 +8,15 @@ class Activity < ActiveRecord::Base
 
   belongs_to :group
 
+  after_create :auto_add_creator_to_participants
+
   validates :title,				presence: true
   validates :min_participants, 	presence: true
   validates :when,				presence: true
+
+  private
+    def auto_add_creator_to_participants
+      creator = User.find(self.creator_id)
+      creator.participate!(self)
+    end
 end

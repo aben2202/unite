@@ -8,7 +8,7 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:parent_category_id) %></th>
-      <th><%= model_class.human_attribute_name(:image_path) %></th>
+      <th><%= model_class.human_attribute_name(:image) %></th>
       <th><%= model_class.human_attribute_name(:leaf) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -24,7 +24,11 @@
         <% else %> 
           <td></td>
         <% end %>
-        <td><%= category.image_path %></td>
+        <% if !category.image_path.empty? %>
+          <td><%= image_tag(category.image_path, height: 35, width: 35) %></td>
+        <% else %>
+          <td>no image</td>
+        <% end %>
         <td><%= category.leaf %></td>
         <td><%=l category.created_at %></td>
         <td>

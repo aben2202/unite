@@ -5,6 +5,7 @@
 
 $pastel_green: rgb(200,255,200);
 $pastel_red: rgb(255,200,200);
+$pastel_blue: rgb(200,255,255);
 
 .users-header{
 	display: -webkit-box;
@@ -25,4 +26,8 @@ $pastel_red: rgb(255,200,200);
 
 .open-spots{
 	font-weight: bold;
+}
+
+#custom-header{
+	background-color: rgb(100,100,100)
 }

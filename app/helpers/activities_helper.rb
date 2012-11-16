@@ -31,7 +31,7 @@ module ActivitiesHelper
 
 	def get_activity_category_image(activity)
 		category = Category.find(activity.category_id)
-		image_tag("#{category.image_path}", height: 35, width: 35)
+		image_tag("#{category.image_path}", height: 35, width: 35, title: "#{category.name}")
 	end
 
 	def get_activity_row_class(activity)
@@ -44,17 +44,5 @@ module ActivitiesHelper
 	    else
 	    	"its-off"
 	    end
-    end
-
-    def get_activity_row_color(activity)
-		if activity.its_on? 
-			if activity.users.count < activity.max_participants
-          		"99FF99"
-        	else
-          		"FF9999"
-        	end
-        else
-        	"FFFFFF"
-        end
     end
 end
