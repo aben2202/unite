@@ -50,6 +50,7 @@ class ActivitiesController < ApplicationController
     @activity = Activity.find(params[:id])
     if @activity.update_attributes(params[:activity])
       flash[:success] = "Activity updated"
+      check_if_its_on(@activity)
       redirect_to root_path
     else
       render 'edit'
@@ -68,4 +69,13 @@ class ActivitiesController < ApplicationController
       creator = User.find(activity.creator_id)
       redirect_to(root_path) unless creator == current_user
     end
+
+    def check_if_its_on(activity)
+      if !activity.its_on? && activity.users.count >= activity.min_participants
+        activity.update_attributes(its_on: true)
+      elsif activity.its_on? && activity.users.count < activity.min_participants
+        activity.update_attributes(its_on: false)
+      end
+    end
+
 end
