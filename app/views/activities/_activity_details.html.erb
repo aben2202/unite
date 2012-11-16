@@ -21,9 +21,11 @@
     <dd><%= @creator.username %></dd>
   </dl>
 
+
+
   <div class="form-actions">
     <%= link_to t('.back', :default => t("helpers.links.back")),
-                activities_path(category_id: @category.id), :class => 'btn'  %>
+                :back, :class => 'btn'  %>
     <% if current_user == @creator %>
       <%= link_to "edit", edit_activity_path(@activity), :class => 'btn' %>
       <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

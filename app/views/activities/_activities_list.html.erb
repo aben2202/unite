@@ -30,7 +30,7 @@
               <%= Category.find(activity.category_id).name %>
             </div>
           </td>
-    	    <td><%= link_to "#{activity.title}", activity_path(activity) %></td>
+    	    <td><%= link_to "#{activity.title}", activity_path(activity)%></td>
           <td><%= activity.when.to_formatted_s :short %></td>
           <td><%= "location here" %></td>
           <% spots_remaining = activity.max_participants - activity.users.count %>

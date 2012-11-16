@@ -28,7 +28,9 @@
     </tbody>
   </table>
 
-  <%= link_to t('.new', :default => t("helpers.links.new")),
-              new_group_path,
-              :class => 'btn btn-primary' %>
+  <% if signed_in? %>
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_group_path,
+                :class => 'btn btn-primary' %>
+  <% end %>
 </div>

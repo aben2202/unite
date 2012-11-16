@@ -1,37 +1,39 @@
-<header class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <div class="nav pull-left">
-        <div class="span1 btn btn-mini">
-          <%= link_to "Activities", root_path %>
-        </div>
-        <div class="span1 btn btn-mini">
-          <%= link_to "Groups", groups_path %>
-        </div>
-        <div class="span1 btn btn-mini">
+<div id="cust-header">
+  <header class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <div class="nav pull-left">
+          <div class="span1 btn btn-mini">
+            <%= link_to "Activities", root_path %>
+          </div>
+          <div class="span1 btn btn-mini">
+            <%= link_to "Groups", groups_path %>
+          </div>
           <% if signed_in? && current_user.admin? %>
-            <%= link_to "Categories", categories_path %>
+            <div class="span1 btn btn-mini">
+              <%= link_to "Categories", categories_path %>
+            </div>
           <% end %>
         </div>
+        <nav>
+          <ul class="nav pull-right">
+            <% if signed_in? %>
+              <li id="fat-menu" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <%= current_user.username %> <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Profile", current_user %></li>
+                  <li class="divider"></li>
+                  <li><%= link_to "Sign out", destroy_user_session_path, method: "delete" %></li>
+                </ul>
+              </li>
+            <% else %> 
+              <li><%= link_to "Sign in", new_user_session_path %></li>
+            <% end %>
+          </ul>
+        </nav>
       </div>
-      <nav>
-        <ul class="nav pull-right">
-          <% if signed_in? %>
-            <li id="fat-menu" class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <%= current_user.username %> <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li><%= link_to "Profile", current_user %></li>
-                <li class="divider"></li>
-                <li><%= link_to "Sign out", destroy_user_session_path, method: "delete" %></li>
-              </ul>
-            </li>
-          <% else %> 
-            <li><%= link_to "Sign in", new_user_session_path %></li>
-          <% end %>
-        </ul>
-      </nav>
     </div>
-  </div>
-</header>
+  </header>
+</div>

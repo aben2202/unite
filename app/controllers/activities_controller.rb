@@ -40,6 +40,7 @@ class ActivitiesController < ApplicationController
     @activity = Activity.find(params[:id])
     @category = Category.find(@activity.category_id)
     @creator = User.find(@activity.creator_id)
+    @previous_category_id = params[:last_category_id]
   end
 
   def edit
