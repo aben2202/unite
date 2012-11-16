@@ -35,11 +35,12 @@
           <td><%= "location here" %></td>
           <% spots_remaining = activity.max_participants - activity.users.count %>
           <td class="open-spots <%= get_activity_row_class(activity) %>">
-          <% if spots_remaining > 0 %>
-            <%= spots_remaining %>
-          <% else %>
-            FULL
-          <% end %>
+            <% if spots_remaining > 0 %>
+              <p><%= spots_remaining %></p>
+            <% else %>
+              <p>FULL</p>
+            <% end %>
+          </td>
     	  </tr>
       <% end %>
     </tbody>

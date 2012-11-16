@@ -34,6 +34,11 @@ $pastel_blue: rgb(200,255,255);
 .open-spots{
 	font-weight: bold;
 	text-align: center;
+
+	p {
+		text-align: center;
+		display: inline;
+	}
 }
 
 #custom-header{
