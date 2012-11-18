@@ -41,6 +41,20 @@
       <% end %>
     </div>
   </div>
+  <br />
+  <h3>Groups<h3>
+
+  <% current_user.groups.each do |group| %>
+    
+      <div class="row">
+        <div class="span5 offset1">
+          <%= check_box_tag :group_ids, group.id, @activity.groups.include?(group), 
+                            name: 'activity[group_ids][]', html: { class: "inline" } %>
+          <span id="category-xbox"> <%= group.name %> </span>
+        </div>
+      </div>
+    
+  <% end %>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

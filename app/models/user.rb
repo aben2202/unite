@@ -10,15 +10,15 @@ class User < ActiveRecord::Base
   				  :first_name, :last_name, :username, :age, :zipcode		#general info
   				 
   #Activity participation associations
-  has_many :participations, foreign_key: "user_id"
+  has_many :participations, foreign_key: "user_id", dependent: :destroy
   has_many :activities, through: :participations
 
   #Group membership associations
-  has_many :group_memberships, foreign_key: "member_id"
+  has_many :group_memberships, foreign_key: "member_id", dependent: :destroy
   has_many :groups, through: :group_memberships
 
   #Category subscription associations
-  has_many :subscriptions, foreign_key: "subscriber_id"
+  has_many :subscriptions, foreign_key: "subscriber_id", dependent: :destroy
   has_many :categories, through: :subscriptions
 
   #validations

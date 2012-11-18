@@ -1,0 +1,17 @@
+<%- model_class = Activity -%>
+<div class="main-area">
+	<table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= model_class.human_attribute_name(:groups) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @activity.groups.each do |group| %>
+  	  <tr>
+  	  	<td><%= link_to_group(group) %></td>
+  	  </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

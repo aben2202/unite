@@ -2,7 +2,14 @@
 
 <%- model_class = Group -%>
 <div class="main-area">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+  <div class="row">
+    <h1 class="span3">
+      <%=t '.title', :default => model_class.model_name.human.pluralize %>
+    </h1>
+    <div class="pull-right">
+      <p>Search Groups</p>
+    </div>
+  </div>
   <table class="table">
     <thead>
       <tr>
@@ -16,7 +23,7 @@
       <% @groups.each do |group| %>
         <% if group.id != 1 %>
           <tr class=<%= get_group_row_class(group) %>>
-            <td><%= group.name %></td>
+            <td><%= link_to_group(group) %></td>
             <td><%= group.details %></td>
             <td><%= group.created_at %></td>
             <td>

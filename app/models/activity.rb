@@ -1,12 +1,14 @@
 class Activity < ActiveRecord::Base
-  attr_accessible :title, :description, :its_on, :max_participants, :min_participants, :when, :category_id
+  attr_accessible :title, :description, :its_on, :max_participants, :min_participants, 
+                  :when, :category_id, :group_ids
 
   has_one :location
 
-  has_many :participations, foreign_key: "activity_id"
+  has_many :participations, foreign_key: "activity_id", dependent: :destroy
   has_many :users, through: :participations
 
-  has_many :groups
+  has_many :activity_group_relations, foreign_key: "activity_id", dependent: :destroy
+  has_many :groups, through: :activity_group_relations
 
   after_create :auto_add_creator_to_participants
 

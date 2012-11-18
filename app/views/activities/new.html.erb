@@ -1,8 +1,7 @@
 <% provide(:title, 'New Activity') %>
 
 <%- model_class = Activity -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
-                                 :default => "New #{model_class.model_name.human} - #{@category.name.capitalize}") %></h1>
+<div class="main-area">
+  <h3>General Info</h3>
+	<%= render :partial => 'form' %>
 </div>
-<%= render :partial => 'form' %>

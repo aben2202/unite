@@ -48,6 +48,7 @@ class ActivitiesController < ApplicationController
   end
 
   def update
+    params[:activity][:group_ids] ||= []
     @activity = Activity.find(params[:id])
     if @activity.update_attributes(params[:activity])
       flash[:success] = "Activity updated"

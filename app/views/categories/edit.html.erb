@@ -1,8 +1,9 @@
 <% provide(:title, 'Edit Category') %>
 
 <%- model_class = Category -%>
-<div class="page-header">
+<div class="main-area">
   <h1><%=t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human,
                                    :default => "Edit #{model_class.model_name.human}") %></h1>
+
+	<%= render :partial => 'form' %>
 </div>
-<%= render :partial => 'form' %>

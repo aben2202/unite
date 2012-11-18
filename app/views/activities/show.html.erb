@@ -1,9 +1,17 @@
 <% provide(:title, 'Activity Details') %>
+<div class="row">
+	<div class="span5">
+	  <%= render "activity_details" %>
+	</div>
 
-<aside class="span5">
-  <%= render "activity_details" %>
-</aside>
+	<div class="span5 offset1">
+	  <%= render "activity_users" %>
+	</div>
+</div>
+<br />
 
-<div class="span5 offset1">
-  <%= render "activity_users" %>
+<div class="row">
+	<div class="span5">
+		<%= render "activity_groups" %>
+	</div>
 </div>
