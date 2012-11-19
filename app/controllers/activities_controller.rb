@@ -1,12 +1,16 @@
 class ActivitiesController < ApplicationController
   before_filter :activity_creator, only: [:edit, :update, :destroy]
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :min_one_group, only: [:create, :update]
 
   def index
     #the params[:category_id] is the id of the category that was just clicked on
-    # @activities = Activity.where(category_id: params[:category_id]).paginate(per_page: 5, page: params[:page])
-    all_category_ids = get_all_subcategory_ids(params[:category_id]) 
-    @activities = Activity.where(category_id: all_category_ids).paginate(per_page: 10, page: params[:page])
+    all_category_ids = get_all_subcategory_ids(params[:category_id])
+    @activities = Activity.paginate(per_page: 10, page: params[:page]).all(joins: {:groups => :activity_group_relations}, 
+                               group: 'activities.id', 
+                               conditions: {:groups => {:id => current_user.group_ids}})
+    
+
     @categories = Category.order("name").where(parent_category_id: params[:category_id])
     if params[:category_id]
       @current_directory = Category.find(params[:category_id])
@@ -31,7 +35,7 @@ class ActivitiesController < ApplicationController
       flash[:success] = "Successfully created activity: #{@activity.title}"
       redirect_to activities_path(category_id: @activity.category_id)
     else
-      flash[:error] = "there was a problem: #{@activity.errors.full_messages}"
+      flash![:error] = "there was a problem: #{@activity.errors.full_messages}"
       render 'new'
     end
   end
@@ -77,6 +81,13 @@ class ActivitiesController < ApplicationController
         activity.update_attributes(its_on: true)
       elsif activity.its_on? && activity.users.count < activity.min_participants
         activity.update_attributes(its_on: false)
+      end
+    end
+
+    def min_one_group
+      if !params[:activity][:group_ids]
+        flash[:error] = "An activity must belong to at least 1 group."
+        redirect_to :back
       end
     end
 
