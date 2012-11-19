@@ -21,6 +21,9 @@ class User < ActiveRecord::Base
   has_many :subscriptions, foreign_key: "subscriber_id", dependent: :destroy
   has_many :categories, through: :subscriptions
 
+  #Comment associations
+  has_many :comments
+
   #validations
   validates :username,  			presence: true
   validates :age,       			presence: true

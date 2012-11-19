@@ -10,6 +10,8 @@ class Activity < ActiveRecord::Base
   has_many :activity_group_relations, foreign_key: "activity_id", dependent: :destroy
   has_many :groups, through: :activity_group_relations
 
+  has_many :comments
+
   after_create :auto_add_creator_to_participants
 
   validates :title,				presence: true
