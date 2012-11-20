@@ -7,8 +7,10 @@
     <dd><%= @activity.title %></dd>
     <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
     <dd><%= @activity.description %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:when) %>:</strong></dt>
-    <dd><%= @activity.when %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
+    <dd><%= @activity.when.to_date %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:time) %>:</strong></dt>
+    <dd><%= @activity.when.strftime('%I:%M %p') %></dd>
     <dt><strong><%= model_class.human_attribute_name(:min_participants) %>:</strong></dt>
     <dd><%= @activity.min_participants %></dd>
     <dt><strong><%= model_class.human_attribute_name(:max_participants) %>:</strong></dt>

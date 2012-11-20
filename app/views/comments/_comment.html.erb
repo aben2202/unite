@@ -1,0 +1,19 @@
+<li class="text-border">
+  <div class="user">
+    <% if signed_in? && comment.user == current_user %>
+      <%= link_to "You", user_path(comment.user) %>
+    <% else %>
+      <%= link_to comment.user.username, user_path(comment.user) %>
+    <% end %>
+    <p class="inline"> wrote (<%= time_ago_in_words(comment.created_at) %> ago): </p>
+  </div>
+  <br />
+  <span class="bold"><%= comment.body %></span>
+  
+  <% if signed_in? && current_user == comment.user %>
+    <%= link_to "delete", comment, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: comment.body %>
+  <% end %>
+  <hr />
+</li>

@@ -1,0 +1,20 @@
+<div class="main-area">
+  <div class="bold"> Comments </div><br />
+
+  <%= form_for(@activity.comments.build(activity_id: @activity.id),
+                html: {class: "inline-form"}) do |f| %>
+    <%= f.text_area :body, cols: 5, rows: 3 %>
+    <div><%= f.hidden_field :activity_id %></div>
+    <%= f.submit "POST", class: "btn btn-primary inline" %>
+  <% end %>
+  <br />
+  <br />
+
+  <% if @comments.any? %>
+    <hr />
+    <ol class="comments">
+      <%= render @comments %>
+    </ol>
+    <%= will_paginate @comments %>
+  <% end %>
+</div>

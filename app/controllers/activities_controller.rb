@@ -45,6 +45,7 @@ class ActivitiesController < ApplicationController
     @category = Category.find(@activity.category_id)
     @creator = User.find(@activity.creator_id)
     @previous_category_id = params[:last_category_id]
+    @comments = Comment.where(activity_id: @activity.id).paginate(per_page: 25, page: params[:page])
   end
 
   def edit
