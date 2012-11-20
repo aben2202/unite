@@ -67,16 +67,30 @@ class User < ActiveRecord::Base
   end
 
   def subscribe!(category)
-    self.subscriptions.create!(category_id: category.id)
-
-    #we need to subscribe them to all subcategories as well
+    #subscribe, if not already, and then do the same with all subcategories
+    if !subscribing?(category)
+      self.subscriptions.create!(category_id: category.id)
+    end
+    if !category.leaf?
+      subcategories = Category.where(parent_category_id: category.id)
+      subcategories.each do |subc|
+        self.subscribe!(subc)
+      end
+    end
   end
 
   def unsubscribe!(category)
-    self.subscriptions.find_by_category_id(category.id).destroy
-
-    #we need to unsubscribe them from all subcategories as well
-  end
+    #unsubscribe, if subscribing, and then do the same with all subcategories
+    if subscribing?(category)
+      self.subscriptions.find_by_category_id(category.id).destroy
+    end
+    if !category.leaf?
+      subcategories = Category.where(parent_category_id: category.id)
+      subcategories.each do |subc|
+        self.unsubscribe!(subc)
+      end
+    end
+ end
 
   private
     def add_to_public_group
