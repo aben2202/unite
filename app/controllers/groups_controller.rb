@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   before_filter :group_creator, only: [:edit, :update, :destroy]
 
   def index
-    @groups = Group.all
+    @groups = Group.search(params[:search])
   end
 
   def new

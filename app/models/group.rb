@@ -9,4 +9,13 @@ class Group < ActiveRecord::Base
 
   validates :name, 			presence: true
   validates :creator_id, 	presence: true
+
+  
+	def self.search(search)
+	  	if !search.blank?
+	      find(:all, conditions: ['name LIKE ?', "%#{search}%"])
+	    else
+	      find(:all)
+	    end
+	end
 end

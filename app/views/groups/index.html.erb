@@ -6,8 +6,12 @@
     <h1 class="span3">
       <%=t '.title', :default => model_class.model_name.human.pluralize %>
     </h1>
-    <div class="pull-right">
-      <p>Search Groups</p>
+    <div class="pull-right inline">
+      <%= form_tag groups_path, method: 'get' do %>
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag "Search", name: nil, class: "btn btn-primary" %>
+      <% end %>
+      hello?
     </div>
   </div>
   <table class="table">
