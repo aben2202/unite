@@ -6,7 +6,7 @@ class ActivitiesController < ApplicationController
   def index
     #the params[:category_id] is the id of the category that was just clicked on
     all_category_ids = get_all_subcategory_ids(params[:category_id])
-    
+
     if signed_in?
       group_ids_to_use = current_user.group_ids
     else
@@ -15,7 +15,7 @@ class ActivitiesController < ApplicationController
 
     @activities = Activity.paginate(per_page: 10, page: params[:page]).all(joins: {:groups => :activity_group_relations}, 
                                group: 'activities.id', 
-                               conditions: {:groups => {:id => current_user.group_ids}})
+                               conditions: {:groups => {:id => group_ids_to_use}})
     
 
     @categories = Category.order("name").where(parent_category_id: params[:category_id])
