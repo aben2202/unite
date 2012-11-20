@@ -2,15 +2,16 @@ module ActivitiesHelper
 	def category_activities(category_id)
 		#given a category this will return all the activites that fall in that category
 		current_category = Category.find(category_id)
-		if current_category.leaf # base case
-			return Activity.where(category_id: current_category.id)
+		all_category_ids = get_all_subcategory_ids(category_id)
+		if !signed_in?
+			#return all activities in all groups
+			return Activity.where(category_id: all_category_ids)
 		else
-			subcategories = Category.where(parent_category_id: category_id)
-			activities = []
-			subcategories.each do |subc|
-				activities += category_activities(subc.id)
-			end
-			return activities
+			#only return activities for user groups
+			return Activity.all(joins: {:groups => :activity_group_relations}, 
+                           		group: 'activities.id', 
+                           		conditions: {:groups => {:id => current_user.group_ids },
+                                        	 :activities => {:category_id => all_category_ids } } )
 		end
 	end
 
