@@ -35,7 +35,7 @@
           </td>
     	    <td><%= link_to "#{activity.title}", activity_path(activity)%></td>
           <td><%= activity.when.strftime('%b %d') %></td>
-          <td><%= "location here" %></td>
+          <td><%= activity.where %></td>
           <% spots_remaining = activity.max_participants - activity.users.count %>
           <td class="open-spots <%= get_activity_row_class(activity) %>">
             <% if spots_remaining > 0 %>

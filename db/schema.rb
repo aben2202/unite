@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119204355) do
+ActiveRecord::Schema.define(:version => 20121120203003) do
 
   create_table "activities", :force => true do |t|
     t.string   "description"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20121119204355) do
     t.integer  "category_id"
     t.string   "title"
     t.integer  "creator_id"
+    t.string   "where"
   end
 
   create_table "activity_group_relations", :force => true do |t|

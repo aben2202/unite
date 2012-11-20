@@ -1,6 +1,6 @@
 class Activity < ActiveRecord::Base
   attr_accessible :title, :description, :its_on, :max_participants, :min_participants, 
-                  :when, :category_id, :group_ids
+                  :when, :where, :category_id, :group_ids
 
   has_one :location
 

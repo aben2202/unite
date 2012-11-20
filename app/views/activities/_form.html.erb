@@ -28,6 +28,13 @@
   </div>
 
   <div class="control-group">
+    <%= f.label :where, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :where, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
     <%= f.label :min_participants, :class => 'control-label' %>
     <div class="controls">
       <%= f.number_field :min_participants, :class => 'number_field', :in => 0..1000000, default: 0 %>
