@@ -10,13 +10,15 @@ class ActivitiesController < ApplicationController
     if signed_in?
       group_ids_to_use = current_user.group_ids
     else
-      group_ids_to_use = [1] #only show public activities if not signed in
+      group_ids_to_use = [1] #only show public activities if not signed in (0 keeps it an array)
     end 
 
     @activities = Activity.paginate(per_page: 10, page: params[:page]).all(joins: {:groups => :activity_group_relations}, 
                                group: 'activities.id', 
-                               conditions: {:groups => {:id => group_ids_to_use},
-                                            :activities => {:category_id => all_category_ids} },
+                               conditions: ["groups.id IN (?) and
+                                             activities.category_id IN (?) and
+                                             datetime(activities.date_and_time) > ?", 
+                                             group_ids_to_use, all_category_ids, Time.now ],
                                order: ["datetime(activities.date_and_time)"] )
 
     @categories = Category.order("name").where(parent_category_id: params[:category_id])

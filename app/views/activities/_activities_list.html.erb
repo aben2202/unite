@@ -8,25 +8,26 @@
   <div class="activity-legend">
     <p class="inline">
       *** Displaying all activities for your groups (whether subscribing or not) *** <br />
-      *** If its
-      <%= image_tag("green.png", height: 25, width: 25) %>
-      then... IT'S ON! ***
+      *** If it's
+      <%= image_tag("green.png", height: 25, width: 25) %>,
+      then IT'S ON! ***<br />
+      *** If it's <span class="bold inline"> bold</span>, then you're already participating ***
     </p>
   </div>
-  <br />
+  <hr />
   <table class="table">
     <thead>
       <tr>
         <th><%= model_class.human_attribute_name(:category) %></th>
         <th><%= model_class.human_attribute_name(:title) %></th>
-        <th><%= model_class.human_attribute_name(:date_and_time) %></th>
+        <th><%= model_class.human_attribute_name(:date) %></th>
         <th><%= model_class.human_attribute_name(:where) %></th>
         <th><%= model_class.human_attribute_name(:open) %></th>
       </tr>
     </thead>
     <tbody>
       <% @activities.each do |activity| %>
-        <tr>
+        <tr class=<%= bold_activity?(activity) %>>
           <td>
             <div>
               <!-- <%= get_activity_category_image(activity) %> -->

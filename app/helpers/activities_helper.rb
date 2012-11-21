@@ -46,4 +46,10 @@ module ActivitiesHelper
 	    	"its-off"
 	    end
     end
+
+    def bold_activity?(activity)
+    	if signed_in? && current_user.participating?(activity)
+    		"bold"
+    	end
+    end
 end
