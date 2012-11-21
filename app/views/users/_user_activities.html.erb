@@ -14,12 +14,10 @@
     </tr>
   </thead>
   <tbody>
-    debugger
     <% @upcoming_activities.each do |activity| %>
       <tr>
         <td>
           <div>
-            <!-- <%= get_activity_category_image(activity) %> -->
             <%= Category.find(activity.category_id).name %>
           </div>
         </td>

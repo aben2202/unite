@@ -39,7 +39,7 @@
 
       <%= f.label :password_confirmation, :class => 'control-label' %>
       <div class="controls">
-        <%= f.password_field :password_confirmation %><br /><br />
+        <%= f.password_field :password_confirmation %><br /><br /><br />
       </div>
 
       <div class="bold">Notifications</div><br />
@@ -48,12 +48,14 @@
       <div class="controls">
         <%= f.check_box :notf_new_activity, checked_value: true, unchecked_value: false %><br /><br />
       </div>
+      <%= f.label "New comment", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.check_box :notf_new_activity, checked_value: true, unchecked_value: false %><br /><br />
+      </div>
       <%= f.label "Activity turns 'ON'", :class => 'control-label' %>
       <div class="controls">
         <%= f.check_box :notf_activity_turns_on, checked_value: true, unchecked_value: false %><br /><br />
       </div>
-      
-
     <% end %>
 
 
