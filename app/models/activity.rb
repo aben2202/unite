@@ -1,6 +1,6 @@
 class Activity < ActiveRecord::Base
   attr_accessible :title, :description, :its_on, :max_participants, :min_participants, 
-                  :when, :where, :category_id, :group_ids
+                  :date_and_time, :where, :category_id, :group_ids
 
   has_one :location
 
@@ -16,7 +16,7 @@ class Activity < ActiveRecord::Base
 
   validates :title,				      presence: true
   validates :min_participants, 	presence: true
-  validates :when,				      presence: true
+  validates :date_and_time,				      presence: true
 
   private
     def auto_add_creator_to_participants

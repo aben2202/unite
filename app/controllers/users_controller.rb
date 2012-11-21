@@ -8,6 +8,11 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
+		@upcoming_activities = Activity.paginate(per_page: 5, page: params[:page]).all(
+				joins: { :participations => { } }, 
+				conditions: ["participations.user_id = ? and DATE(activities.date_and_time) >= DATE(?)", 
+								@user.id, Time.now],
+				order: ["datetime(activities.date_and_time)"] )
 	end
 
 	def update

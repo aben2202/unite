@@ -16,10 +16,8 @@ class ActivitiesController < ApplicationController
     @activities = Activity.paginate(per_page: 10, page: params[:page]).all(joins: {:groups => :activity_group_relations}, 
                                group: 'activities.id', 
                                conditions: {:groups => {:id => group_ids_to_use},
-                                            :activities => {:category_id => all_category_ids} } )
-
-    @activities.sort_by!(&:when)
-    
+                                            :activities => {:category_id => all_category_ids} },
+                               order: ["datetime(activities.date_and_time)"] )
 
     @categories = Category.order("name").where(parent_category_id: params[:category_id])
     if params[:category_id]

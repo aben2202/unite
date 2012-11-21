@@ -15,14 +15,14 @@
   <div class="control-group">
     <%= f.label :date, :class => 'control-label' %>
     <div class="controls">
-      <%= f.date_select :when, :class => 'datetime_select' , default: 1.hour.from_now%>
+      <%= f.date_select :date_and_time, :class => 'datetime_select' , default: 1.hour.from_now%>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :time, :class => 'control-label' %>
     <div class="controls">
-      <%= f.time_select :when, :class => 'datetime_select' , ignore_date: true, 
+      <%= f.time_select :date_and_time, :class => 'datetime_select' , ignore_date: true, 
                         ampm: true, minute_step: 5, default: 1.hour.from_now%>
     </div>
   </div>

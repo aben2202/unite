@@ -42,6 +42,7 @@ class GroupsController < ApplicationController
 
   def destroy
     Group.find(params[:id]).destroy
+    redirect_to :back
   end
 
   private

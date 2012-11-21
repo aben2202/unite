@@ -1,0 +1,41 @@
+<%- model_class = Activity -%>
+
+<h3>Upcoming Activities</h3>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:category) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:date) %></th>
+      <th><%= model_class.human_attribute_name(:where) %></th>
+      <th><%= model_class.human_attribute_name(:open) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @upcoming_activities.each do |activity| %>
+      <tr>
+        <td>
+          <div>
+            <!-- <%= get_activity_category_image(activity) %> -->
+            <%= Category.find(activity.category_id).name %>
+          </div>
+        </td>
+  	    <td><%= link_to "#{activity.title}", activity_path(activity)%></td>
+        <td><%= activity.date_and_time.strftime('%b %d') %></td>
+        <td><%= activity.where %></td>
+        <% spots_remaining = activity.max_participants - activity.users.count %>
+        <td class="open-spots <%= get_activity_row_class(activity) %>">
+          <% if spots_remaining > 0 %>
+            <p><%= spots_remaining %></p>
+          <% else %>
+            <p>FULL</p>
+          <% end %>
+        </td>
+  	  </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @upcoming_activities %>
