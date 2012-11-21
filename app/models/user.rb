@@ -6,8 +6,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me,  #added by devise
-  				  :first_name, :last_name, :username, :age, :zipcode		#general info
+  attr_accessible :email, :password, :password_confirmation, :remember_me,   #added by devise
+  				  :first_name, :last_name, :username, :age, :zipcode,		           #general info
+            :notf_new_activity, :notf_activity_turns_on                      #notifications
   				 
   #Activity participation associations
   has_many :participations, foreign_key: "user_id", dependent: :destroy

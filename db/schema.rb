@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121121005410) do
+ActiveRecord::Schema.define(:version => 20121121021049) do
 
   create_table "activities", :force => true do |t|
     t.string   "description"
@@ -100,6 +100,8 @@ ActiveRecord::Schema.define(:version => 20121121005410) do
     t.integer  "age"
     t.integer  "zipcode"
     t.boolean  "admin",                  :default => false
+    t.boolean  "notf_new_activity",      :default => true
+    t.boolean  "notf_activity_turns_on", :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

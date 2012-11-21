@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 			redirect_to @user
 		else
 			flash[:error] = "There was a problem: #{@user.errors.full_messages}"
-			render 'show'
+			redirect_to @user
 		end
 	end
 end

@@ -41,7 +41,22 @@
       <div class="controls">
         <%= f.password_field :password_confirmation %><br /><br />
       </div>
+
+      <div class="bold">Notifications</div><br />
+
+      <%= f.label "New activity", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.check_box :notf_new_activity, checked_value: true, unchecked_value: false %><br /><br />
+      </div>
+      <%= f.label "Activity turns 'ON'", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.check_box :notf_activity_turns_on, checked_value: true, unchecked_value: false %><br /><br />
+      </div>
+      
+
     <% end %>
+
+
 
     <div class="form-actions">
       <%= link_to t('.back', :default => t("helpers.links.back")),
