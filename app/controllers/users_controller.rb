@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 	end
 
 	def update
+		debugger
 		@user = User.find(params[:id])
 		@user.update_attributes(params[:user])
 		if @user.save
