@@ -33,4 +33,25 @@ class UsersController < ApplicationController
 			redirect_to @user
 		end
 	end
+
+	def destroy
+		user = User.find(params[:id])
+
+		#destroy user subscriptions associations
+		user.subscriptions.each do |sub|
+			sub.destroy
+		end
+
+		#destroy user participations associations
+		user.participations.each do |par|
+			par.destroy
+		end
+
+		#destroy user group membership associations
+		user.group_memberships.each do |mem|
+			mem.destroy
+		end
+
+		user.destroy
+		redirect_to :back
 end

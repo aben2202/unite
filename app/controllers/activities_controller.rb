@@ -82,7 +82,20 @@ class ActivitiesController < ApplicationController
   end
 
   def destroy
-    Activity.find(params[:id]).destroy
+    activity = Activity.find(params[:id])
+
+    #destroy all participation associations for this activity
+    debugger
+    activity.participations.each do |participation|
+      participation.destroy
+    end
+
+    #destroy all activity-group-relation associations for this activity
+    activity.activity_group_relations.each do |agr|
+      agr.destroy
+    end
+
+    activity.destroy
     flash[:success] = "Activity deleted"
     redirect_to root_path
   end

@@ -60,7 +60,7 @@ module ActivitiesHelper
     			if !sent_to.include? member.email
     				if member.notf_new_activity
 	    				sent_to += [member.email]
-	    				UserMailer.new_activity(member, @activity, @category).deliver
+	    				UserMailer.new_activity(member, @activity, @category, group).deliver
 	    			end
     			end
     		end

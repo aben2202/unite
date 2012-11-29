@@ -41,7 +41,19 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    Group.find(params[:id]).destroy
+    group = Group.find(params[:id])
+    
+    #delete all memebership associations for this group
+    group.group_memberships.each do |membership|
+      membership.destroy
+    end
+
+    #delete all activity-group-relations for this group
+    group.activity_group_relations.each do |agr|
+      agr.destroy
+    end
+
+    group.destory
     redirect_to :back
   end
 

@@ -5,7 +5,7 @@ class Group < ActiveRecord::Base
 	has_many :members, through: :group_memberships
 
 	has_many :activity_group_relations, foreign_key: "group_id", dependent: :destroy
-	has_many :activitits, through: :activity_group_relations
+	has_many :activities, through: :activity_group_relations
 
 	after_create :auto_add_creator_to_members
 

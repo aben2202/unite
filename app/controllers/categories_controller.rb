@@ -39,7 +39,14 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    Category.find(params[:id]).destroy
+    category = Category.find(params[:id])
+
+    #delete all subscriptions to this category
+    category.subscriptions.each do |sub|
+      sub.destroy
+    end
+
+    category.destroy
     flash[:success] = "Category removed"
     redirect_to categories_path
   end
