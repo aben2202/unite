@@ -54,4 +54,5 @@ class UsersController < ApplicationController
 
 		user.destroy
 		redirect_to :back
+	end
 end
