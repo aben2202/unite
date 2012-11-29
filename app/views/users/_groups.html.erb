@@ -1,0 +1,39 @@
+<div class="page-header">
+  <% if signed_in? && current_user == @user %>
+    <h3>Your Groups</h3>
+  <% else %>
+    <h3>Groups for <%= @user.username %></h3>
+  <% end %>
+</div>
+
+<% if @user.groups.count > 1 %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <% if signed_in? && @user == current_user %>
+        	<th><%=t '.actions', :default => t("helpers.actions") %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.groups.each do |group| %>
+        <% if group.id != 1 %>
+    	    <tr class=<%= get_group_row_class(group) %>>
+    	      <td><%= group.name %></td>
+            <td>
+            	<% if signed_in? && @user == current_user %>
+                <%= form_for(current_user.group_memberships.find_by_group_id(group.id),
+                	                  html: { method: :delete, class: "inline-form" }) do |f| %>
+    				      <%= image_submit_tag "leave.png", class: "subscribe-button inline", title: "leave group" %>
+                <% end %>
+    			    <% end %>
+            </td>
+    	    </tr>
+        <% end %>
+  	  <% end %>
+    </tbody>
+  </table>
+<% elsif signed_in? && @user == current_user %>
+  <p>You are not currently a member of any group.  To join a group, go to the group page and search for groups.  When you find a group you would like to join, simply click on the red plus sign.  You're then a member of that group!</p>
+<% end %>

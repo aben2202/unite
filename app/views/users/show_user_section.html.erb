@@ -1,0 +1,31 @@
+<div class="row profile-page">
+	<div class="navbar navbar-inner container"> 
+		<ul class="nav">
+			<li><%= link_to "General Info", general_info_user_path(@user) %></li>
+			<li><%= link_to "Groups", groups_user_path(@user) %></li>
+			<li><%= link_to "Subscriptions", subscriptions_user_path(@user) %></li>
+			<li><%= link_to "Upcoming Activities", activities_user_path(@user) %></li>
+			<% if signed_in? && current_user == @user %>
+				<li><%= link_to "Notifications", notifications_user_path(@user) %></li>
+			<% end %>
+		</ul>
+	</div>
+</div>
+
+<div class="container">
+	<div class="span11">
+		<div class="main-area"?>
+			<%  if @section == "groups" %>
+				<%= render "groups" %>
+			<% elsif @section == "subscriptions" %>
+				<%= render "subscriptions" %>
+			<% elsif @section == "notifications" %>
+				<%= render "notifications" %>
+			<% elsif @section == "activities" %>
+				<%= render "activities" %>
+			<% elsif @section == "general_info" %>
+				<%= render "general_info" %>
+			<% end %>
+		</div>
+	</div>
+</div>

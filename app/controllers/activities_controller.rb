@@ -5,7 +5,6 @@ class ActivitiesController < ApplicationController
 
   def index
     #the params[:category_id] is the id of the category that was just clicked on
-    debugger
     all_category_ids = get_all_subcategory_ids(params[:category_id])
 
     if signed_in?

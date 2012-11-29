@@ -1,0 +1,9 @@
+<div class="page-header">
+	<% if signed_in? && current_user == @user %>
+	  <h3>Your Info</h3>
+	<% else %>
+	  <h3>Info for <%= @user.username %></h3>
+	<% end %>
+</div>
+
+<%= render :partial => 'form' %>

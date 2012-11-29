@@ -1,0 +1,32 @@
+<div class="page-header">
+  <% if signed_in? && current_user == @user %>
+    <h3>Your Notifications</h3>
+  <% else %>
+    <h3>Notifications for <%= @user.username %></h3>
+  <% end %>
+</div>
+
+<%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <!--- <%= f.label "New activity", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :notf_new_activity, checked_value: true, unchecked_value: false %><br /><br />
+    </div> -->
+    <%= f.label "New comment", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :notf_new_comment, checked_value: true, unchecked_value: false %><br /><br />
+    </div>
+    <%= f.label "Activity turns 'ON'", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :notf_activity_turns_on, checked_value: true, unchecked_value: false %><br /><br />
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= link_to t('.back', :default => t("helpers.links.back")),
+                    :back, :class => 'btn'  %>
+    <% if signed_in? && @user == current_user %>
+      <%= f.submit "Update", :class => 'btn btn-primary' %>
+    <% end %>
+  </div>
+<% end %>

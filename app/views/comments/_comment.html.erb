@@ -1,9 +1,9 @@
 <li class="text-border">
   <div class="user">
     <% if signed_in? && comment.user == current_user %>
-      <%= link_to "You", user_path(comment.user) %>
+      <%= link_to "You", general_info_user_path(comment.user) %>
     <% else %>
-      <%= link_to comment.user.username, user_path(comment.user) %>
+      <%= link_to comment.user.username, general_info_user_path(comment.user) %>
     <% end %>
     <p class="inline"> wrote (<%= time_ago_in_words(comment.created_at) %> ago): </p>
   </div>

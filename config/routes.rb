@@ -1,7 +1,12 @@
 Unite::Application.routes.draw do
   devise_for :users
 
-  resources :users
+  resources :users do
+    member do
+      get :general_info, :groups, :subscriptions, :activities, :notifications
+    end
+  end
+
   resources :categories
   resources :subscriptions, only: [:create, :destroy]
   resources :activities 
