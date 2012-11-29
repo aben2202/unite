@@ -1,0 +1,13 @@
+<% debugger %>
+
+Hey <%= @user.first_name %>, a new <%= @category.name %> activity is now available and awaiting you to join.  Here are the details...
+
+Category:		<%= @category.name %>
+Title:			<%= @activity.title %>
+Description:	<%= @activity.description %>
+Date:			<%= @activity.date_and_time.strftime("%a, %b %d") %>
+Time: 			<%= @activity.date_and_time.strftime("%l:%M %p") %>  
+Location:		<%= @activity.where %> 
+
+
+To view this activity and sign up, click here.

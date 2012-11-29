@@ -1,0 +1,34 @@
+Hey <%= @user.first_name %>, a new <%= @category.name %> activity is now available and waiting for you to join.  Here are the details...
+
+<br />
+<br />
+<table>
+	<tr>
+		<td>Category:</td>
+		<td><%= @category.name %></td>
+	</tr>
+	<tr>
+		<td>Title:</td>
+		<td><%= @activity.title %></td>
+	</tr>
+	<tr>
+		<td>Description:</td>
+		<td><%= @activity.description %></td>
+	</tr>
+	<tr>
+		<td>Date:</td>
+		<td><%= @activity.date_and_time.strftime("%a, %b %d") %></td>
+	</tr>
+	<tr>
+		<td>Time:</td>
+		<td><%= @activity.date_and_time.strftime("%l:%M %p") %></td>
+	</tr>
+	<tr>
+		<td>Location:</td>
+		<td><%= @activity.where %></td>
+	</tr>
+</table>
+<br />
+<br />
+
+To view this activity and sign up, click here.

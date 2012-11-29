@@ -46,9 +46,11 @@ class ActivitiesController < ApplicationController
   def create
     @activity = Activity.new(params[:activity])
     @activity.creator_id = current_user.id
+    @category = Category.find(@activity.category_id)
     if @activity.save
       flash[:success] = "Successfully created activity: #{@activity.title}"
       redirect_to activities_path(category_id: @activity.category_id)
+      send_emails_for_new_activity
     else
       flash![:error] = "there was a problem: #{@activity.errors.full_messages}"
       render 'new'

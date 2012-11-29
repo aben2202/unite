@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 
-		if Rails.env.development?
+		if Rails.env.development? #sqlite3 needs datetime manips
 			conditions = ["participations.user_id = ? and DATE(activities.date_and_time) >= DATE(?)", @user.id, Time.now]
 			order = ["datetime(activities.date_and_time)"]
 		else
@@ -22,7 +22,6 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		debugger
 		@user = User.find(params[:id])
 		@user.update_attributes(params[:user])
 		if @user.save

@@ -52,4 +52,19 @@ module ActivitiesHelper
     		"bold"
     	end
     end
+
+    def send_emails_for_new_activity
+    	sent_to = []
+    	@activity.groups.each do |group|
+    		group.members.each do |member|
+    			if !sent_to.include? member.email
+    				if member.notf_new_activity
+	    				sent_to += [member.email]
+	    				UserMailer.new_activity(member, @activity, @category).deliver
+	    			end
+    			end
+    		end
+    	end
+    end
+
 end
