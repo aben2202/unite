@@ -63,6 +63,7 @@ module ActivitiesHelper
     						if sub.category_id == @category.id
 			    				sent_to += [member.email]
 			    				UserMailer.new_activity(member, @activity, @category, group).deliver
+			    				break
 			    			end
 		    			end
 	    			end
