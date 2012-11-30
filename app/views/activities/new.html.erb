@@ -1,6 +1,10 @@
 <% provide(:title, 'New Activity') %>
 
 <%- model_class = Activity -%>
+
+<div class="instruction-question">Creating a new activity...</div>
+<p> All the basic info for the activity must be filled in.  <span class="bold">Also, every activity must belong to at least 1 group.</span> By default, every activity is open to the 'public' group.  If you do not want this activity to be open to the public, make sure you uncheck the "public" checkbox in the groups section.</p><br />
+
 <div class="main-area">
   <h3>General Info</h3>
 	<%= render :partial => 'form' %>

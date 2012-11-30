@@ -7,11 +7,12 @@
   <% end %>
   <div class="activity-legend">
     <p class="inline">
-      *** Displaying all activities for your groups (whether subscribing or not) *** <br />
+      *** Displaying all activities for your groups (whether subscribing or not). *** <br />
       *** If it's
-      <%= image_tag("green.png", height: 25, width: 25) %>,
-      then IT'S ON! ***<br />
-      *** If it's <span class="bold inline"> bold</span>, then you're already participating ***
+      <!-- <%= image_tag("green.png", height: 25, width: 25) %>, -->
+      <span class="its-on-open">green</span>,
+      then <span class="its-on-text">IT'S ON!</span> and spots remain.
+      If it's <span style="color: red;">red</span> then it's full. ***<br />
     </p>
   </div>
   <hr />
@@ -27,7 +28,7 @@
     </thead>
     <tbody>
       <% @activities.each do |activity| %>
-        <tr class=<%= bold_activity?(activity) %>>
+        <tr class=<%= get_activity_row_class(activity) %>>
           <td>
             <div>
               <!-- <%= get_activity_category_image(activity) %> -->
@@ -38,7 +39,7 @@
           <td><%= activity.date_and_time.strftime('%b %d') %></td>
           <td><%= activity.where %></td>
           <% spots_remaining = activity.max_participants - activity.users.count %>
-          <td class="open-spots <%= get_activity_row_class(activity) %>">
+          <td class="open-spots">
             <% if spots_remaining > 0 %>
               <p><%= spots_remaining %></p>
             <% else %>

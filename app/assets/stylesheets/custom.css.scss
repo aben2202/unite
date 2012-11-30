@@ -22,6 +22,12 @@ body{
 	color: black;
 }
 
+.its-on-text{
+	font-size: 15px;
+	font-family: 'Luckiest Guy';
+	color: green;
+}
+
 #user-info{
 	text-align: center;
 }
@@ -36,11 +42,12 @@ body{
 }
 
 .its-on-open{
-	background-color: $pastel_green;
+	color: green;
+	font-weight: bold;
 }
 
 .its-on-full{
-	background-color: $pastel_green;
+	color: red;
 }
 
 .its-off{

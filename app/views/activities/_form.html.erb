@@ -65,8 +65,13 @@
     
       <div class="row">
         <div class="span5 offset1">
-          <%= check_box_tag :group_ids, group.id, @activity.groups.include?(group), 
-                            name: 'activity[group_ids][]', html: { class: "inline" } %>
+          <% if group.id == 1 %>
+            <%= check_box_tag :group_ids, group.id, @activity.groups.include?(group), 
+                              name: 'activity[group_ids][]', html: { class: "inline" }, checked: true %>
+          <% else %>
+            <%= check_box_tag :group_ids, group.id, @activity.groups.include?(group), 
+                              name: 'activity[group_ids][]', html: { class: "inline" } %>
+          <% end %>
           <span id="category-xbox"> <%= group.name %> </span>
         </div>
       </div>

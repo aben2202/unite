@@ -1,4 +1,6 @@
 Unite::Application.routes.draw do
+  get "static_pages/help"
+
   devise_for :users
 
   resources :users do
@@ -17,7 +19,7 @@ Unite::Application.routes.draw do
 
 
   root to: "activities#index", category_id: 13
-
+  match '/help', to: 'static_pages#help'
 
 
 ####################################
