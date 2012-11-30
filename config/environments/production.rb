@@ -31,7 +31,7 @@ Unite::Application.configure do
     domain: "gmail.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: "andebenson@gmail.com",
+    user_name: "itson.notifications@gmail.com",
     password: "adb7886m5"
   }
 
