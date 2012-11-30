@@ -1,0 +1,5 @@
+<p><%= @user.username %> posted a new comment in the activity "<%= @activity.title %>"....<p>
+
+<p>"<%= @comment.body %>"</p>
+
+<p>To view this activiy and all comments posted, click <%= link_to "here", activity_url(@activity) %>.</p>

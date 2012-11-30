@@ -9,4 +9,12 @@ class UserMailer < ActionMailer::Base
 
     mail to: user.email, subject: "A new activity is available for you!"
   end
+
+  def new_comment(user, activity, comment)
+  	@user = user
+  	@activity = activity
+  	@comment = comment
+
+  	mail to: user.email, subject: "#{@user.username} posted a new comment in one of your activities"
+  end
 end
