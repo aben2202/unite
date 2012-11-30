@@ -85,7 +85,6 @@ class ActivitiesController < ApplicationController
     activity = Activity.find(params[:id])
 
     #destroy all participation associations for this activity
-    debugger
     activity.participations.each do |participation|
       participation.destroy
     end
