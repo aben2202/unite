@@ -8,12 +8,12 @@
 			</a>
 			<div class="nav-collapse">
 				<ul class="nav">
-					<li><%= link_to "Activities", root_path %></li>
-					<li><%= link_to "Groups", groups_path %></li>
+					<li><%= link_to "Activities", root_path, class: "header-item" %></li>
+					<li><%= link_to "Groups", groups_path , class: "header-item" %></li>
 					<% if signed_in? and current_user.admin? %>
-						<li><%= link_to "Categories", categories_path %></li>
+						<li><%= link_to "Categories", categories_path, class: "header-item" %></li>
 					<% end %>
-					<li><%= link_to "Help", help_path %></li>
+					<li><%= link_to "Help", help_path, class: "header-item" %></li>
 				</ul>
 			</div>
 			<ul class="nav pull-right">
@@ -29,7 +29,7 @@
 		                </ul>
 	              	</li>
 	            <% else %> 
-	                <li><%= link_to "Sign in", new_user_session_path %></li>
+	                <li><%= link_to "Sign in", new_user_session_path, id: "sign-in" %></li>
 	            <% end %>
             </ul>
 		</div>

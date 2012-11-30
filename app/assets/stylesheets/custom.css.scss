@@ -4,6 +4,11 @@ $pastel_red: rgb(255,200,200);
 $pastel_blue: rgb(200,255,255);
 
 
+
+h3{
+	font-family: 'Rum Raisin';
+}
+
 body{
   padding: 25px;
   padding-top: 75px;
@@ -17,8 +22,24 @@ body{
 	color: green;
 	float: left;
     margin-right: 10px;
-    padding-top: 10px;
     line-height: 1;
+}
+/*
+.header-item{
+	padding-top: 15px;
+	font-size: 20px;
+	font-family: 'Rum Raisin';
+	color: black;
+	line-height: 1;
+}
+*/
+#sign-in{
+	padding-top: 15px;
+	font-size: 20px;
+	font-family: 'Rum Raisin';
+	color: black;
+	line-height: 1;
+	margin-right: 10px;
 }
 
 .instruction-question{
