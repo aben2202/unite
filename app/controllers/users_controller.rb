@@ -41,17 +41,16 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@section = "activities"
 
-		if Rails.env.development? #sqlite3 needs datetime manips
-			conditions = ["participations.user_id = ? and DATE(activities.date_and_time) >= DATE(?)", @user.id, Time.now]
-			order = ["datetime(activities.date_and_time)"]
-		else
+		# if Rails.env.development? #sqlite3 needs datetime manips
+		# 	conditions = ["participations.user_id = ? and DATE(activities.date_and_time) >= DATE(?)", @user.id, Time.now]
+		# 	order = ["datetime(activities.date_and_time)"]
+		# else
 			conditions = ["participations.user_id = ? and activities.date_and_time >= ?", @user.id, Time.now]
 			order = ["activities.date_and_time"]
-		end
+		# end
 
 		@upcoming_activities = Activity.paginate(per_page: 5, page: params[:page]).all(
 				joins: { :participations => { } }, conditions: conditions, order: order )
-
 		render "show_user_section"
 	end
 
@@ -101,6 +100,7 @@ class UsersController < ApplicationController
 		end
 
 		user.destroy
-		redirect_to :back
+		flash[:success] = "You account has successfully been deleted."
+		redirect_to root_path
 	end
 end

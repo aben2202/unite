@@ -8,10 +8,12 @@ module ActivitiesHelper
 			return Activity.where(category_id: all_category_ids)
 		else
 			#only return activities for user groups
+			conditions = "groups.id IN (?) AND activities.category_id IN (?) AND 
+						  activities.date_and_time > (?)", current_user.group_ids, all_category_ids, Time.now
+
 			return Activity.all(joins: {:groups => :activity_group_relations}, 
                            		group: 'activities.id', 
-                           		conditions: {:groups => {:id => current_user.group_ids },
-                                        	 :activities => {:category_id => all_category_ids } } )
+                           		conditions: conditions )
 		end
 	end
 

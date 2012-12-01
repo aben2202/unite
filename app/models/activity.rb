@@ -4,10 +4,10 @@ class Activity < ActiveRecord::Base
 
   has_one :location
 
-  has_many :participations, foreign_key: "activity_id", dependent: :destroy
+  has_many :participations, foreign_key: "activity_id"
   has_many :users, through: :participations
 
-  has_many :activity_group_relations, foreign_key: "activity_id", dependent: :destroy
+  has_many :activity_group_relations, foreign_key: "activity_id"
   has_many :groups, through: :activity_group_relations
 
   has_many :comments

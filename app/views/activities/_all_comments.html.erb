@@ -1,11 +1,15 @@
 <div class="main-area">
   <div class="bold"> Comments </div><br />
 
-  <%= form_for(@activity.comments.build(activity_id: @activity.id),
-                html: {class: "inline-form"}) do |f| %>
-    <%= f.text_area :body, cols: 5, rows: 3 %>
-    <div><%= f.hidden_field :activity_id %></div>
-    <%= f.submit "POST", class: "btn btn-primary inline" %>
+  <% if signed_in? %>
+    <%= form_for(@activity.comments.build(activity_id: @activity.id),
+                  html: {class: "inline-form"}) do |f| %>
+      <%= f.text_area :body, cols: 5, rows: 3 %>
+      <div><%= f.hidden_field :activity_id %></div>
+      <%= f.submit "POST", class: "btn btn-primary inline" %>
+    <% end %>
+  <% else %>
+    <p>You must be signed in to add a comment</p>
   <% end %>
   <br />
   <br />

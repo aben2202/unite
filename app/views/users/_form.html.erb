@@ -50,6 +50,11 @@
                     :back, :class => 'btn'  %>
       <% if signed_in? && @user == current_user %>
         <%= f.submit "Update", :class => 'btn btn-primary' %>
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                user_path(@user),
+                :method => :delete,
+                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure you want to delete your account?  All your previous data will be lost.')) },
+                :class => 'btn btn-danger far-right' %>
       <% end %>
     </div>
   </div>

@@ -11,22 +11,22 @@ class User < ActiveRecord::Base
             :notf_new_activity, :notf_activity_turns_on, :notf_new_comment   #notifications
   				 
   #Activity participation associations
-  has_many :participations, foreign_key: "user_id", dependent: :destroy
+  has_many :participations, foreign_key: "user_id"
   has_many :activities, through: :participations
 
   #Group membership associations
-  has_many :group_memberships, foreign_key: "member_id", dependent: :destroy
+  has_many :group_memberships, foreign_key: "member_id"
   has_many :groups, through: :group_memberships
 
   #Category subscription associations
-  has_many :subscriptions, foreign_key: "subscriber_id", dependent: :destroy
+  has_many :subscriptions, foreign_key: "subscriber_id"
   has_many :categories, through: :subscriptions
 
   #Comment associations
   has_many :comments
 
   #validations
-  validates :username,  			presence: true
+  validates :username,  			presence: true,  uniqueness: { case_sensitive: false }
   validates :age,       			presence: true
   validates :zipcode,   			presence: true
 
