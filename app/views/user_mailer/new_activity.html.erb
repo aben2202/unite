@@ -27,9 +27,13 @@ Hey <%= @user.first_name %>, a new <%= @category.name %> activity is now availab
 		<td class="bold">Location:</td>
 		<td><%= @activity.where %></td>
 	</tr>
+	<tr>
+		<td class="bold">Organizer:</td>
+		<td><%= @creator.username %></td>
+	</tr>
 </table>
 <br />
 
 <p>To view this activity and sign up, click <%= link_to "here", activity_url(@activity) %>.</p>
 
-<p>You received this email because you are currently subscribing to the category "<%= @category.name %>" and are a member of the group "<%= @group.name %>".  If you no longer wish to receive emails in this category, please login and unsubscribe from this category.  If you no longer want to receive emails related to this group, please login and and leave this group.</p>
+<p>You received this email because you are currently subscribing to the category "<%= @category.name %>" and are a member of the group "<%= @group.name %>".  If you no longer wish to receive emails in this category, please login and unsubscribe from this category.  If you no longer want to receive emails related to this group, please login and leave this group.</p>

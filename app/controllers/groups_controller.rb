@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   before_filter :group_creator, only: [:edit, :update, :destroy]
 
   def index
-    @groups = Group.search(params[:search])
+    @groups = Group.paginate(per_page: 10, page: params[:page]).search(params[:search])
   end
 
   def new
@@ -24,6 +24,26 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
+    debugger
+    begin
+      creator = User.find(@group.creator_id)
+      @creator_string = creator.username
+    rescue
+      @creator_string = "The creator of this group is no longer a user of 'IT'S ON!'"
+    end
+
+    conditions = "groups.id = (?)", @group.id
+    @members = User.paginate(per_page: 10, page: params[:page]).all(
+                                                joins: { :groups => :group_memberships},
+                                                conditions: conditions,
+                                                group: 'users.id',
+                                                order: 'users.username')
+    #same conditions here
+    @activities = Activity.paginate(per_page: 10, page: params[:page]).all(
+                                                joins: {:groups => :activity_group_relations},
+                                                conditions: conditions,
+                                                group: 'activities.id',
+                                                order: 'activities.date_and_time')
   end
 
   def edit

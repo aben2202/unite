@@ -48,7 +48,7 @@
     <div class="form-actions">
       <%= link_to t('.back', :default => t("helpers.links.back")),
                     :back, :class => 'btn'  %>
-      <% if signed_in? && @user == current_user %>
+      <% if (signed_in? && @user == current_user) || current_user.admin? %>
         <%= f.submit "Update", :class => 'btn btn-primary' %>
         <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                 user_path(@user),

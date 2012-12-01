@@ -6,6 +6,7 @@ class UserMailer < ActionMailer::Base
     @activity = activity
     @category = category
     @group = group
+    @creator = User.find(@activity.creator_id)
 
     mail to: user.email, subject: "A new activity is available for you!"
   end

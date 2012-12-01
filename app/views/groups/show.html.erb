@@ -7,19 +7,19 @@
   <dl class="dl-horizontal">
     <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
     <dd><%= @group.name %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:creator) %>:</strong></dt>
+    <dd><%= @creator_string %></dd>
     <dt><strong><%= model_class.human_attribute_name(:details) %>:</strong></dt>
     <dd><%= @group.details %></dd>
   </dl>
+  <br />
 
+
+  <h3 class="inline">Members</h3>
   <div class="list-users">
     <table class="table table-striped">
-      <thead>
-        <tr>
-          <th><%= model_class.human_attribute_name(:Members) %></th>
-        </tr>
-      </thead>
       <tbody>
-        <% @group.members.each do |member| %>
+        <% @members.each do |member| %>
         <tr>
           <td><%= link_to "#{member.username}", general_info_user_path(member) %></td>
         </tr>
@@ -27,6 +27,36 @@
       </tbody>
     </table>
   </div>
+
+  <%= will_paginate @members %>
+  <br />
+
+  <h3>Activities</h3>
+  <div class="list-activities">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Where</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @activities.each do |activity| %>
+        <tr>
+          <% category = Category.find(activity.category_id) %>
+          <td><%= category.name %></td>
+          <td><%= activity.title %></td>
+          <td><%= activity.date_and_time.strftime("%b %d") %></td>
+          <td><%= activity.where %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= will_paginate @activities %>
 
   <% if signed_in? && current_user.id == @group.creator_id %>
     <div class="form-actions">

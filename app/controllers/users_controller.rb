@@ -6,6 +6,10 @@ class UsersController < ApplicationController
 		@user.join_group!(1)
 	end
 
+	def index
+		@users = User.all(order: 'users.username')
+	end
+
 	def show
 		@user = User.find(params[:id])
 		@section = params[:section]
