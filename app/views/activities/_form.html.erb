@@ -28,7 +28,14 @@
   </div>
 
   <div class="control-group">
-    <%= f.label :where, :class => 'control-label' %>
+    <%= f.label :zipcode, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :zipcode, :class => 'number_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :location_details, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :where, :class => 'text_field' %>
     </div>

@@ -1,6 +1,6 @@
 class Activity < ActiveRecord::Base
   attr_accessible :title, :description, :its_on, :max_participants, :min_participants, 
-                  :date_and_time, :where, :category_id, :group_ids
+                  :date_and_time, :where, :zipcode, :category_id, :group_ids
 
   has_one :location
 
@@ -16,7 +16,9 @@ class Activity < ActiveRecord::Base
 
   validates :title,				      presence: true
   validates :min_participants, 	presence: true
-  validates :date_and_time,				      presence: true
+  validates :date_and_time,			presence: true
+  VALID_ZIPCODE_REGEX = %r(\b[0-9]{5}(?:-[0-9]{4})?\b)
+  validates :zipcode,           presence: true, format: { with: VALID_ZIPCODE_REGEX }
 
   private
     def auto_add_creator_to_participants

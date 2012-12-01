@@ -21,7 +21,7 @@
         <th><%= model_class.human_attribute_name(:category) %></th>
         <th><%= model_class.human_attribute_name(:title) %></th>
         <th><%= model_class.human_attribute_name(:date) %></th>
-        <th><%= model_class.human_attribute_name(:where) %></th>
+        <th><%= model_class.human_attribute_name(:zipcode) %></th>
         <th><%= model_class.human_attribute_name(:open) %></th>
       </tr>
     </thead>
@@ -36,7 +36,7 @@
           </td>
     	    <td><%= link_to "#{activity.title}", activity_path(activity)%></td>
           <td><%= activity.date_and_time.strftime('%b %d') %></td>
-          <td><%= activity.where %></td>
+          <td><%= activity.zipcode %></td>
           <% spots_remaining = activity.max_participants - activity.users.count %>
           <td class="open-spots">
             <% if spots_remaining > 0 %>

@@ -51,7 +51,7 @@ class ActivitiesController < ApplicationController
       redirect_to activities_path(category_id: @activity.category_id)
       send_emails_for_new_activity
     else
-      flash![:error] = "there was a problem: #{@activity.errors.full_messages}"
+      flash.now[:error] = "there was a problem: #{@activity.errors.full_messages}"
       render 'new'
     end
   end
@@ -102,7 +102,7 @@ class ActivitiesController < ApplicationController
     def activity_creator
       activity = Activity.find(params[:id])
       creator = User.find(activity.creator_id)
-      redirect_to(root_path) unless creator == current_user
+      redirect_to(root_path) unless creator == current_user || current_user.admin?
     end
 
     def check_if_its_on(activity)

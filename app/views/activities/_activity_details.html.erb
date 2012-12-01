@@ -11,6 +11,10 @@
     <dd><%= @activity.date_and_time.to_date %></dd>
     <dt><strong><%= model_class.human_attribute_name(:time) %>:</strong></dt>
     <dd><%= @activity.date_and_time.strftime('%I:%M %p') %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:zipcode) %>:</strong></dt>
+    <dd><%= @activity.zipcode %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:location_details) %>:</strong></dt>
+    <dd><%= @activity.where %></dd>
     <dt><strong><%= model_class.human_attribute_name(:min_participants) %>:</strong></dt>
     <dd><%= @activity.min_participants %></dd>
     <dt><strong><%= model_class.human_attribute_name(:max_participants) %>:</strong></dt>
@@ -28,7 +32,7 @@
   <div class="form-actions">
     <%= link_to t('.back', :default => t("helpers.links.back")),
                 :back, :class => 'btn'  %>
-    <% if current_user == @creator %>
+    <% if (current_user == @creator) || current_user.admin? %>
       <%= link_to "edit", edit_activity_path(@activity), :class => 'btn' %>
       <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                   activity_path(@activity),

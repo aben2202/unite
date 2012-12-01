@@ -24,7 +24,6 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    debugger
     begin
       creator = User.find(@group.creator_id)
       @creator_string = creator.username
