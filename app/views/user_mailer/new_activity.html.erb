@@ -24,7 +24,15 @@ Hey <%= @user.first_name %>, a new <%= @category.name %> activity is now availab
 		<td><%= @activity.date_and_time.strftime("%l:%M %p") %></td>
 	</tr>
 	<tr>
-		<td class="bold">Location:</td>
+		<td class="bold">Zipcode:</td>
+		<td><%= @activity.zipcode %></td>
+	</tr>
+	<tr>
+		<td class="bold">Distance:</td>
+		<td><%= "#{@activity.distance_to(@user).round(0)} miles" %></td>
+	</tr>
+	<tr>
+		<td class="bold">Place:</td>
 		<td><%= @activity.where %></td>
 	</tr>
 	<tr>
