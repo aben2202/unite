@@ -9,7 +9,11 @@ class ActivitiesController < ApplicationController
     if signed_in?
       group_ids_to_use = current_user.group_ids
       if params[:distance]
-        @distance = params[:distance]
+        if params[:distance] == ""
+          @distance = false
+        else
+          @distance = params[:distance]
+        end
       else
         @distance = false
       end
@@ -17,11 +21,12 @@ class ActivitiesController < ApplicationController
       group_ids_to_use = [1] #only show public activities if not signed in (0 keeps it an array)
       @distance = false
     end 
+
     conditions = ["groups.id IN (?) and activities.category_id IN (?) and
                     activities.date_and_time >= ?", group_ids_to_use, all_category_ids, Time.now ]
     order = ["activities.date_and_time"]
-    debugger
-    if @distance && @distance != ""
+    
+    if @distance
       @activities = Activity.paginate(per_page: 10, page: params[:page]).near(current_user, @distance).all(
                                   joins: {:groups => :activity_group_relations}, 
                                   group: 'activities.id', 
