@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,   #added by devise
   				  :first_name, :last_name, :username, :age, :zipcode,		           #general info
+            :public_distance_notf_max,  #max distance to notify for public activities
             :notf_new_activity, :notf_activity_turns_on, :notf_new_comment   #notifications
 
   geocoded_by :zipcode

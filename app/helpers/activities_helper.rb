@@ -69,9 +69,19 @@ module ActivitiesHelper
     				if member.notf_new_activity
     					for sub in member.subscriptions do
     						if sub.category_id == @category.id
-			    				sent_to += [member.email]
-			    				UserMailer.new_activity(member, @activity, @category, group).deliver
-			    				break
+    							if group.id == 1 #public group
+	    							if member.public_distance_notf_max != -1
+	    								if @activity.distance_to(member) < member.public_distance_notf_max
+						    				sent_to += [member.email]
+						    				UserMailer.new_activity(member, @activity, @category, group).deliver
+						    				break
+						    			end
+						    		end
+					    		else
+					    			sent_to += [member.email]
+						    		UserMailer.new_activity(member, @activity, @category, group).deliver
+						    		break
+					    		end
 			    			end
 		    			end
 	    			end

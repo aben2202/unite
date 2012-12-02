@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121201215934) do
+ActiveRecord::Schema.define(:version => 20121202014721) do
 
   create_table "activities", :force => true do |t|
     t.string    "description"
@@ -85,29 +85,30 @@ ActiveRecord::Schema.define(:version => 20121201215934) do
   end
 
   create_table "users", :force => true do |t|
-    t.string    "email",                  :default => "",    :null => false
-    t.string    "encrypted_password",     :default => "",    :null => false
+    t.string    "email",                    :default => "",    :null => false
+    t.string    "encrypted_password",       :default => "",    :null => false
     t.string    "reset_password_token"
     t.timestamp "reset_password_sent_at"
     t.timestamp "remember_created_at"
-    t.integer   "sign_in_count",          :default => 0
+    t.integer   "sign_in_count",            :default => 0
     t.timestamp "current_sign_in_at"
     t.timestamp "last_sign_in_at"
     t.string    "current_sign_in_ip"
     t.string    "last_sign_in_ip"
-    t.timestamp "created_at",                                :null => false
-    t.timestamp "updated_at",                                :null => false
+    t.timestamp "created_at",                                  :null => false
+    t.timestamp "updated_at",                                  :null => false
     t.string    "first_name"
     t.string    "last_name"
     t.string    "username"
     t.integer   "age"
     t.integer   "zipcode"
-    t.boolean   "admin",                  :default => false
-    t.boolean   "notf_new_activity",      :default => true
-    t.boolean   "notf_activity_turns_on", :default => true
-    t.boolean   "notf_new_comment",       :default => true
+    t.boolean   "admin",                    :default => false
+    t.boolean   "notf_new_activity",        :default => true
+    t.boolean   "notf_activity_turns_on",   :default => true
+    t.boolean   "notf_new_comment",         :default => true
     t.float     "latitude"
     t.float     "longitude"
+    t.integer   "public_distance_notf_max"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

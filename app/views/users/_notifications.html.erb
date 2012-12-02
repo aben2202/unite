@@ -12,6 +12,12 @@
     <div class="controls">
       <%= f.check_box :notf_new_activity, checked_value: true, unchecked_value: false %><br /><br />
     </div> -->
+    <%= f.label "Public notification distance", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :public_distance_notf_max, default: 4000, min: -1, class: "distance-entry" %><br />
+      You will not be notified if a <span class="bold">PUBLIC</span> activity is more than this distance (miles) away from you.<br />
+      Enter "-1" to not be notified about PUBLIC activities at all.<br /><br />
+    </div>
     <%= f.label "New comment", :class => 'control-label' %>
     <div class="controls">
       <%= f.check_box :notf_new_comment, checked_value: true, unchecked_value: false %><br /><br />
