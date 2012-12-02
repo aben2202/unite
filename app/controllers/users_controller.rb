@@ -104,7 +104,7 @@ class UsersController < ApplicationController
 		end
 
 		user.destroy
-		flash[:success] = "You account has successfully been deleted."
+		flash[:success] = "Your account has successfully been deleted."
 		redirect_to root_path
 	end
 end
