@@ -11,9 +11,15 @@ module ActivitiesHelper
 			conditions = "groups.id IN (?) AND activities.category_id IN (?) AND 
 						  activities.date_and_time > (?)", current_user.group_ids, all_category_ids, Time.now
 
-			return Activity.all(joins: {:groups => :activity_group_relations}, 
-                           		group: 'activities.id', 
-                           		conditions: conditions )
+			if @distance
+				return Activity.near(current_user, @distance).all(joins: {:groups => :activity_group_relations}, 
+	                           		group: 'activities.id', 
+	                           		conditions: conditions )
+			else
+				return Activity.all(joins: {:groups => :activity_group_relations}, 
+	                           		group: 'activities.id', 
+	                           		conditions: conditions )
+			end
 		end
 	end
 

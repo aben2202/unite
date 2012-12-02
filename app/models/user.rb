@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,   #added by devise
   				  :first_name, :last_name, :username, :age, :zipcode,		           #general info
             :notf_new_activity, :notf_activity_turns_on, :notf_new_comment   #notifications
+
+  geocoded_by :zipcode
   				 
   #Activity participation associations
   has_many :participations, foreign_key: "user_id"

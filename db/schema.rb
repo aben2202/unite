@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121201202956) do
+ActiveRecord::Schema.define(:version => 20121201215934) do
 
   create_table "activities", :force => true do |t|
     t.string    "description"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(:version => 20121201202956) do
     t.integer   "creator_id"
     t.string    "where"
     t.integer   "zipcode"
+    t.float     "latitude"
+    t.float     "longitude"
   end
 
   create_table "activity_group_relations", :force => true do |t|
@@ -104,6 +106,8 @@ ActiveRecord::Schema.define(:version => 20121201202956) do
     t.boolean   "notf_new_activity",      :default => true
     t.boolean   "notf_activity_turns_on", :default => true
     t.boolean   "notf_new_comment",       :default => true
+    t.float     "latitude"
+    t.float     "longitude"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

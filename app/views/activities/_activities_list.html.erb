@@ -21,7 +21,7 @@
         <th><%= model_class.human_attribute_name(:category) %></th>
         <th><%= model_class.human_attribute_name(:title) %></th>
         <th><%= model_class.human_attribute_name(:date) %></th>
-        <th><%= model_class.human_attribute_name(:zipcode) %></th>
+        <th><%= model_class.human_attribute_name(:distance) %></th>
         <th><%= model_class.human_attribute_name(:open) %></th>
       </tr>
     </thead>
@@ -36,7 +36,11 @@
           </td>
     	    <td><%= link_to "#{activity.title}", activity_path(activity)%></td>
           <td><%= activity.date_and_time.strftime('%b %d') %></td>
-          <td><%= activity.zipcode %></td>
+          <% if signed_in? %>
+            <td><%= "#{activity.distance_to(current_user).round(0)} mi" %></td>
+          <% else %>
+            <td>unknown</td>
+          <% end %>
           <% spots_remaining = activity.max_participants - activity.users.count %>
           <td class="open-spots">
             <% if spots_remaining > 0 %>
@@ -53,6 +57,15 @@
    <%= will_paginate @activities %>
 
   <% if signed_in? %>
+
+    Only show activities within 
+    <%= form_tag root_path, method: 'get', class: "inline" do %>
+        <%= number_field_tag :distance, params[:distance], class: "distance-entry" %>
+        miles from me 
+        <%= submit_tag "Search", name: nil, class: "btn btn-mini btn-primary" %>
+    <% end %>
+    <br /><br />
+
     <% if @current_directory %>
     	<%= link_to t('.new', :default => t("helpers.links.new")),
     	            new_activity_path(category_id: @current_directory.id),
