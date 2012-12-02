@@ -7,6 +7,11 @@
 	<aside class="span3">
 		<%= render "category_navigation" %>
 		<br />
+		<% if signed_in? and current_user.subscriptions.count == 0 %>
+			<span class="bold">You are currently not subscribing to any categories!</span>
+			<span>  To get the most out of </span>
+			<span class="its-on-text">IT'S ON!</span><span>, subscribe to categories that you're interested in by clicking on the rss icons.  If it's green, then you're subscribing.  You will be notified when activities come up in your subscriptions.
+		<% end %>
 		<br />
 	</aside>
 
