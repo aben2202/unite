@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
             :notf_new_activity, :notf_activity_turns_on, :notf_new_comment   #notifications
 
   geocoded_by :zipcode
+  after_validation :geocode
   				 
   #Activity participation associations
   has_many :participations, foreign_key: "user_id"

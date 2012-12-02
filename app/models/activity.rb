@@ -3,6 +3,7 @@ class Activity < ActiveRecord::Base
                   :date_and_time, :where, :zipcode, :category_id, :group_ids
 
   geocoded_by :zipcode
+  after_validation :geocode
 
   has_one :location
 
