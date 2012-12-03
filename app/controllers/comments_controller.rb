@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   	@comment = Comment.new(params[:comment])
     @activity = Activity.find(@comment.activity_id)
     @comment.user_id = current_user.id
+    @comment_writer = current_user.username
     if @comment.save
       flash[:success] = "Successfully posted comment"
       redirect_to :back
