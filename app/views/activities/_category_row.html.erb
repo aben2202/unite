@@ -1,4 +1,10 @@
-<td><%= link_to "#{category.name}", activities_path(category_id: category) %>
+<% if !category.leaf? %>
+  <% display_name = "#{category.name}*" %>
+<% else %>
+  <% display_name = "#{category.name}" %>
+<% end %>
+
+<td><%= link_to "#{display_name}", activities_path(category_id: category) %>
   <%= " (#{category_activities(category.id).size})" %>
   <span id="category-icon">
     <% if signed_in? %>
@@ -17,5 +23,5 @@
         <% end %>        
       <% end %>
     <% end %>
-  </span>
+  </span><br />
 </td>
