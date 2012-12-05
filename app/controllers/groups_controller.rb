@@ -72,7 +72,7 @@ class GroupsController < ApplicationController
       agr.destroy
     end
 
-    group.destory
+    group.destroy
     redirect_to :back
   end
 
