@@ -24,6 +24,8 @@ class UserMailer < ActionMailer::Base
     @user = user
     @activity = activity
 
-    mail to: user.email, subject: "The activity '#{@activity.title}' IS ON!"
+    logger.debug "about to send mail for #{user.email}"
+
+    mail to: user.email, subject: "The activity '#{activity.title}' IS ON!"
   end
 end
