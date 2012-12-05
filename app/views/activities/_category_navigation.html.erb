@@ -1,8 +1,8 @@
 <%- model_class = Category -%>
 
 <div class="main-area">
-  <h2>Categories</h2>
-  * = Click to view subcategories<br /><br />
+  <h2>Feeds</h2>
+  * = Contains subfeeds<br /><br />
   <% if @parent_directory %>
   	<%= link_to "Back to #{@parent_directory.name}", 
   				activities_path(category_id: @parent_directory.id) %>
