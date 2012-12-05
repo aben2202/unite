@@ -79,7 +79,10 @@ class GroupsController < ApplicationController
   private
     def group_creator
       group = Group.find(params[:id])
-      creator = User.find(group.creator_id)
-      redirect_to groups_path unless creator == current_user
+      begin 
+        creator = User.find(group.creator_id)
+        redirect_to groups_path unless creator == current_user || current_user.admin?
+      rescue
+        redirect_to groups_path unless current_user.admin?
     end
 end
