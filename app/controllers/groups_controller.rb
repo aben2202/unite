@@ -84,5 +84,6 @@ class GroupsController < ApplicationController
         redirect_to groups_path unless creator == current_user || current_user.admin?
       rescue
         redirect_to groups_path unless current_user.admin?
+      end
     end
 end
