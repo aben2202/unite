@@ -58,6 +58,7 @@ class ActivitiesController < ApplicationController
   end
 
   def create
+    debugger
     @activity = Activity.new(params[:activity])
     @activity.creator_id = current_user.id
     @category = Category.find(@activity.category_id)

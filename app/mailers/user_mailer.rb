@@ -19,4 +19,11 @@ class UserMailer < ActionMailer::Base
 
   	mail to: user.email, subject: "#{@comment_writer} posted a new comment in one of your activities"
   end
+
+  def its_on(user, activity)
+    @user = user
+    @activity = activity
+
+    mail to: user.email, subject: "The activity '#{@activity.title}' IS ON!"
+  end
 end
