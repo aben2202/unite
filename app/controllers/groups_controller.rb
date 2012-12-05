@@ -73,7 +73,8 @@ class GroupsController < ApplicationController
     end
 
     group.destroy
-    redirect_to :back
+    flash[:success]= "Successfully deleted group."
+    redirect_to groups_path
   end
 
   private
