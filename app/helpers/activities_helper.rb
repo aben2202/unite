@@ -90,10 +90,10 @@ module ActivitiesHelper
     	end
     end
 
-    def send_emails_for_its_on
-    	@activity.users.each do |participant|
-    		if participant.notf_its_on?
-    			UserMailer.its_on(participant, @activity)
+    def send_emails_for_its_on(activity)
+    	activity.users.each do |participant|
+    		if participant.notf_activity_turns_on?
+    			UserMailer.its_on(participant, activity)
     		end
     	end
     end

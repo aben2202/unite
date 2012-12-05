@@ -1,3 +1,5 @@
+include ActivitiesHelper
+
 class Participation < ActiveRecord::Base
   attr_accessible :activity_id, :user_id
 
@@ -16,6 +18,7 @@ class Participation < ActiveRecord::Base
   		act = Activity.find(self.activity_id)
   		if !act.its_on? && act.users.count >= act.min_participants
   			act.update_attributes(its_on: true)
+        send_emails_for_its_on(act)
   		elsif act.its_on? && act.users.count < act.min_participants
   			act.update_attributes(its_on: false)
   		end
