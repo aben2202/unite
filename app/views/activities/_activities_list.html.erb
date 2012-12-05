@@ -59,8 +59,9 @@
   <% if signed_in? %>
 
     Only show activities within 
-    <%= form_tag root_path, method: 'get', class: "inline" do %>
+    <%= form_tag activities_path, method: 'get', class: "inline" do %>
         <%= number_field_tag :distance, params[:distance], class: "distance-entry" %>
+        <%= hidden_field_tag :category_id, params[:category_id] %>
         miles from me 
         <%= submit_tag "Search", name: nil, class: "btn btn-mini btn-primary" %>
     <% end %>

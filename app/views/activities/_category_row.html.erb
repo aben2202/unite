@@ -4,7 +4,7 @@
   <% display_name = "#{category.name}" %>
 <% end %>
 
-<td><%= link_to "#{display_name}", activities_path(category_id: category) %>
+<td><%= link_to "#{display_name}", activities_path(category_id: category, distance: @distance) %>
   <%= " (#{category_activities(category.id).size})" %>
   <span id="category-icon">
     <% if signed_in? %>
