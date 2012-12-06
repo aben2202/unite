@@ -15,46 +15,50 @@
     </p>
   </div>
   <hr />
-  <table class="table">
-    <thead>
-      <tr>
-        <th><%= model_class.human_attribute_name(:category) %></th>
-        <th><%= model_class.human_attribute_name(:title) %></th>
-        <th><%= model_class.human_attribute_name(:date) %></th>
-        <th><%= model_class.human_attribute_name(:distance) %></th>
-        <th><%= model_class.human_attribute_name(:open) %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @activities.each do |activity| %>
-        <tr class=<%= get_activity_row_class(activity) %>>
-          <td>
-            <div>
-              <!-- <%= get_activity_category_image(activity) %> -->
-              <%= Category.find(activity.category_id).name %>
-            </div>
-          </td>
-    	    <td><%= link_to "#{activity.title}", activity_path(activity)%></td>
-          <td><%= activity.date_and_time.strftime('%b %d') %></td>
-          <% if signed_in? %>
-            <td><%= "#{activity.distance_to(current_user).round(0)} mi" %></td>
-          <% else %>
-            <td>unknown</td>
-          <% end %>
-          <% spots_remaining = activity.max_participants - activity.users.count %>
-          <td class="open-spots">
-            <% if spots_remaining > 0 %>
-              <p><%= spots_remaining %></p>
+  <% if @activities.count > 0 %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= model_class.human_attribute_name(:category) %></th>
+          <th><%= model_class.human_attribute_name(:title) %></th>
+          <th><%= model_class.human_attribute_name(:date) %></th>
+          <th><%= model_class.human_attribute_name(:distance) %></th>
+          <th><%= model_class.human_attribute_name(:open) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @activities.each do |activity| %>
+          <tr class=<%= get_activity_row_class(activity) %>>
+            <td>
+              <div>
+                <!-- <%= get_activity_category_image(activity) %> -->
+                <%= Category.find(activity.category_id).name %>
+              </div>
+            </td>
+      	    <td><%= link_to "#{activity.title}", activity_path(activity)%></td>
+            <td><%= activity.date_and_time.strftime('%b %d') %></td>
+            <% if signed_in? %>
+              <td><%= "#{activity.distance_to(current_user).round(0)} mi" %></td>
             <% else %>
-              <p>FULL</p>
+              <td>unknown</td>
             <% end %>
-          </td>
-    	  </tr>
-      <% end %>
-    </tbody>
-  </table>
+            <% spots_remaining = activity.max_participants - activity.users.count %>
+            <td class="open-spots">
+              <% if spots_remaining > 0 %>
+                <p><%= spots_remaining %></p>
+              <% else %>
+                <p>FULL</p>
+              <% end %>
+            </td>
+      	  </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-   <%= will_paginate @activities %>
+     <%= will_paginate @activities %>
+  <% else %>
+    <p class="bold">There are no activities to show.</p><br />
+  <% end %>
 
   <% if signed_in? %>
 

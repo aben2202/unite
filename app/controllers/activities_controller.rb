@@ -9,7 +9,7 @@ class ActivitiesController < ApplicationController
     if signed_in?
       group_ids_to_use = current_user.group_ids
       if params[:distance]
-        if params[:distance] == ""
+        if params[:distance] == "" || params[:distance] == false
           @distance = false
         else
           @distance = params[:distance]
