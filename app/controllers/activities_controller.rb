@@ -26,7 +26,7 @@ class ActivitiesController < ApplicationController
                     activities.date_and_time >= ?", group_ids_to_use, all_category_ids, Time.now ]
     order = ["activities.date_and_time"]
 
-    if @distance
+    if @distance != false
       @activities = Activity.paginate(per_page: 10, page: params[:page]).near(current_user, @distance).all(
                                   joins: {:groups => :activity_group_relations}, 
                                   group: 'activities.id', 

@@ -17,7 +17,7 @@ class Activity < ActiveRecord::Base
 
   after_create :auto_add_creator_to_participants
 
-  validates :title,				      presence: true
+  validates :title,				      presence: true, uniqueness: { case_sensitive: false }
   validates :min_participants, 	presence: true
   validates :date_and_time,			presence: true
   VALID_ZIPCODE_REGEX = %r(\b[0-9]{5}(?:-[0-9]{4})?\b)

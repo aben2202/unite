@@ -9,7 +9,7 @@ class Group < ActiveRecord::Base
 
 	after_create :auto_add_creator_to_members
 
-	validates :name, 			presence: true
+	validates :name, 		presence: true, uniqueness: { case_sensitive: false }
 	validates :creator_id, 	presence: true
 
   
