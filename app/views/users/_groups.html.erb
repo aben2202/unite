@@ -20,7 +20,7 @@
       <% @user.groups.each do |group| %>
         <% if group.id != 1 %>
     	    <tr class=<%= get_group_row_class(group) %>>
-    	      <td><%= group.name %>
+    	      <td><%= link_to group.name, group_path(group) %>
               <% if !group.open_to_public? %>
                 <span class="unbold">(private)</span>
               <% end %>

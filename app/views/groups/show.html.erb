@@ -11,6 +11,8 @@
     <dd><%= @creator_string %></dd>
     <dt><strong><%= model_class.human_attribute_name(:details) %>:</strong></dt>
     <dd><%= @group.details %></dd>
+    <dt><strong><%= model_class.human_attribute_name(:open_to_public) %>:</strong></dt>
+    <dd><%= @group.open_to_public %></dd>
   </dl>
   <br />
 
@@ -27,6 +29,14 @@
       </tbody>
     </table>
   </div>
+  <% if !@group.open_to_public && current_user.member?(@group) %>
+    <%= form_tag activities_path, method: 'get', class: "inline" do %>
+          <%= text_field_tag :users %>
+          <%= hidden_field_tag :group_id, params[:id] %>
+          <%= submit_tag "Invite", name: nil, class: "btn btn-mini btn-primary" %> 
+          (Enter emails seperated by commas)<br />
+    <% end %>
+  <% end %>
 
   <%= will_paginate @members %>
   <br />
