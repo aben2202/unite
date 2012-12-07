@@ -1,0 +1,7 @@
+<p>You have been invited to join the group "<%= @group.name %>" in IT'S ON!</p>
+
+<% if @user != nil %>
+	<p>Please click <%= link_to "here", invites_user_url(@user) %> to view and reply to your invitations.</p>
+<% else %>
+	<p>Our records indicate that you are not currently a member of "IT'S ON!".  Please click <%= link_to "here", new_user_registration_url %> to create an account and then respond to this invitation.</p>
+<% end %>

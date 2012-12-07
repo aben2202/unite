@@ -95,7 +95,20 @@ class User < ActiveRecord::Base
         self.unsubscribe!(subc)
       end
     end
- end
+  end
+
+  def reply_to_invite!(invite, response)
+    guest = User.find_by_email(invite.guest_email)
+    if signed_in? and current_user == guest
+      if response == "accept"
+        group = Group.find(invite.group_id)
+        self.group_memberships.build(group_id: group.id)
+        invite.update_attributes(response: 1)
+      elsif response == "deny"
+        invite.update_attributes(response: 0)
+      end
+    end
+  end
 
   private
     def add_to_public_group

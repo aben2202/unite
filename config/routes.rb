@@ -5,7 +5,8 @@ Unite::Application.routes.draw do
 
   resources :users do
     member do
-      get :general_info, :groups, :subscriptions, :activities, :notifications
+      get :general_info, :groups, :subscriptions, :activities, :notifications, :invites
+      post :invite_reply
     end
   end
 

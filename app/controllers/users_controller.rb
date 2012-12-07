@@ -66,11 +66,39 @@ class UsersController < ApplicationController
 	end
 
 	def notifications
-		@title = "notifications"
+		@title = "Notifications"
 		@user = User.find(params[:id])
 		@section = "notifications"
 		render "show_user_section"
 	end
+
+	def invites
+		@title = "Invites"
+		@user = User.find(params[:id])
+		@section = "invitations"
+		render "show_user_section"
+	end
+
+	def invite_reply
+		debugger
+		@invite = Invite.find(params[:invite_id])
+		@response = params[:response]
+
+		guest = User.find_by_email(@invite.guest_email)
+	    if signed_in? and current_user == guest
+	      if @response == "accept"
+	        group = Group.find(@invite.group_id)
+	        current_user.join_group!(group)
+	        @invite.update_attributes(response: 1)
+	        flash[:success] = "Successfully added group."
+	      elsif @response == "deny"
+	        @invite.update_attributes(response: 0)
+	        flash[:success] = "Successfuly denied invitation."
+	      end
+	      redirect_to :back
+	  	end
+    end
+
 
 	def update
 		@user = User.find(params[:id])

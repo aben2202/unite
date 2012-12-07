@@ -1,5 +1,5 @@
 class Invite < ActiveRecord::Base
-  attr_accessible :guest_id, :group_id
+  attr_accessible :guest_email, :group_id, :host_id, :response
 
   validates :guest_email,	presence: true
   VALID_EMAIL = %r([a-z0-9!#$&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b)

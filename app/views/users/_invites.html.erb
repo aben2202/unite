@@ -1,0 +1,45 @@
+<div class="page-header">
+  <h3>Your Pending Invitations</h3>
+</div>
+
+<% pending_user_invites = Invite.where(guest_email: @user.email, response: nil) %>
+
+<% if pending_user_invites.count > 0 %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Group</th>
+        <% if signed_in? && @user == current_user %>
+        	<th><%=t '.actions', :default => t("helpers.actions") %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% pending_user_invites.each do |invite| %>
+        <% group = Group.find_by_id(invite.group_id) %>
+  	    <tr>
+  	      <td><%= link_to group.name, group_path(group) %></td>
+          <td>
+          	<% if signed_in? && @user == current_user %>
+
+              <%= form_tag invite_reply_user_path, class: "inline" do %>
+                <%= hidden_field_tag :invite_id, invite.id %>
+                <%= hidden_field_tag :response, "accept" %>
+                <%= image_submit_tag "join.jpg", class: "subscribe-button inline", title: "accept" %>
+              <% end %>
+
+              <%= form_tag invite_reply_user_path, class: "inline" do %>
+                <%= hidden_field_tag :invite_id, invite.id %>
+                <%= hidden_field_tag :response, "deny" %>
+                <%= image_submit_tag "leave.png", class: "subscribe-button inline", title: "deny" %>
+              <% end %>
+
+  			    <% end %>
+          </td>
+  	    </tr>
+  	  <% end %>
+    </tbody>
+  </table>
+<% elsif signed_in? && @user == current_user %>
+  <p>You do not currently have any outstanding group invitations.</p>
+<% end %>

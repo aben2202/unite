@@ -7,6 +7,7 @@
 			<li><%= link_to "Upcoming Activities", activities_user_path(@user) %></li>
 			<% if signed_in? && current_user == @user %>
 				<li><%= link_to "Notifications", notifications_user_path(@user) %></li>
+				<li><%= link_to "Invites", invites_user_path(@user) %></li>
 			<% end %>
 		</ul>
 	</div>
@@ -25,6 +26,8 @@
 				<%= render "activities" %>
 			<% elsif @section == "general_info" %>
 				<%= render "general_info" %>
+			<% elsif @section == "invitations" %>
+				<%= render "invites" %>
 			<% end %>
 		</div>
 	</div>

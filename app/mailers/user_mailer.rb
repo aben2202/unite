@@ -26,4 +26,12 @@ class UserMailer < ActionMailer::Base
 
     mail to: user.email, subject: "The activity #{activity.title} IS ON!"
   end
+
+  def group_invite(email, group)
+    @email = email
+    @group = group
+    @user = User.find_by_email(@email)
+
+    mail to: @email, subject: "You've been invited to join a private group!"
+  end
 end
