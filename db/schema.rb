@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121202014721) do
+ActiveRecord::Schema.define(:version => 20121207172245) do
 
   create_table "activities", :force => true do |t|
     t.string    "description"
@@ -65,9 +65,10 @@ ActiveRecord::Schema.define(:version => 20121202014721) do
   create_table "groups", :force => true do |t|
     t.string    "name"
     t.string    "details"
-    t.timestamp "created_at", :null => false
-    t.timestamp "updated_at", :null => false
+    t.timestamp "created_at",                       :null => false
+    t.timestamp "updated_at",                       :null => false
     t.integer   "creator_id"
+    t.boolean   "open_to_public", :default => true
   end
 
   create_table "participations", :force => true do |t|

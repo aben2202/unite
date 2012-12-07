@@ -1,5 +1,5 @@
 class Group < ActiveRecord::Base
-	attr_accessible :details, :name
+	attr_accessible :details, :name, :open_to_public
 
 	has_many :group_memberships, foreign_key: "group_id"
 	has_many :members, through: :group_memberships
@@ -9,8 +9,8 @@ class Group < ActiveRecord::Base
 
 	after_create :auto_add_creator_to_members
 
-	validates :name, 		presence: true, uniqueness: { case_sensitive: false }
-	validates :creator_id, 	presence: true
+	validates :name, 			presence: true, uniqueness: { case_sensitive: false }
+	validates :creator_id, 		presence: true
 
   
 	def self.search(search)
