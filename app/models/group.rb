@@ -15,10 +15,11 @@ class Group < ActiveRecord::Base
   
 	def self.search(search)
 	  	if !search.blank?
-	      find(:all, conditions: ['name LIKE ?', "%#{search}%"])
-	    else
-	      find(:all)
-	    end
+	  		conditions = ["name LIKE (?) AND open_to_public = ?", "%#{search}%", true]
+	  	else
+	  		conditions = ["open_to_public = ?", true]
+	  	end
+	     find(:all, conditions: conditions)
 	end
 
 	private

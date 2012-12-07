@@ -1,4 +1,8 @@
 <%= form_for @group, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.label "Open to the public", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :open_to_public, checked_value: true, unchecked_value: false %><br /><br />
+    </div>
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
