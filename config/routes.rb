@@ -13,7 +13,11 @@ Unite::Application.routes.draw do
   resources :subscriptions, only: [:create, :destroy]
   resources :activities 
   resources :participations, only: [:create, :destroy]
-  resources :groups  
+  resources :groups do
+    member do
+      post :invite
+    end
+  end
   resources :group_memberships, only: [:create, :destroy]  
   resources :comments
 

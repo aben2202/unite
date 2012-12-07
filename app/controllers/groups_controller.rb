@@ -59,6 +59,29 @@ class GroupsController < ApplicationController
     end
   end
 
+  def invite
+    @group = Group.find(params[:group_id])
+    debugger
+    if params[:emails] != ""
+      @emails = params[:emails].split(",")
+      #check for email validity
+      email_format = %r([a-z0-9!#$&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b)
+      for email in @emails do
+        if email.match(email_format).nil?
+          flash[:error] = "At least one email address is invalid"
+          redirect_to :back and return
+          break
+        end
+      end
+      send_invite_emails(@group, @emails)
+      flash[:success] = "Invites successfully sent."
+      redirect_to :back
+    else
+      flash[:error] = "Must provide at least 1 VALID email address"
+      redirect_to :back
+    end
+  end
+
   def destroy
     group = Group.find(params[:id])
     

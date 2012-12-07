@@ -9,4 +9,9 @@ module GroupsHelper
 			end
 		end
 	end
+
+	def send_invite_emails(group, emails)
+		debugger
+		#do stuff here
+	end
 end

@@ -30,8 +30,8 @@
     </table>
   </div>
   <% if !@group.open_to_public && current_user.member?(@group) %>
-    <%= form_tag activities_path, method: 'get', class: "inline" do %>
-          <%= text_field_tag :users %>
+    <%= form_tag invite_group_path, class: "inline" do %>
+          <%= text_field_tag :emails, params[:emails] %>
           <%= hidden_field_tag :group_id, params[:id] %>
           <%= submit_tag "Invite", name: nil, class: "btn btn-mini btn-primary" %> 
           (Enter emails seperated by commas)<br />
