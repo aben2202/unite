@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207172245) do
+ActiveRecord::Schema.define(:version => 20121207214641) do
 
   create_table "activities", :force => true do |t|
     t.string    "description"
@@ -69,6 +69,15 @@ ActiveRecord::Schema.define(:version => 20121207172245) do
     t.timestamp "updated_at",                       :null => false
     t.integer   "creator_id"
     t.boolean   "open_to_public", :default => true
+  end
+
+  create_table "invites", :force => true do |t|
+    t.integer  "host_id"
+    t.string   "guest_email"
+    t.integer  "group_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "response"
   end
 
   create_table "participations", :force => true do |t|

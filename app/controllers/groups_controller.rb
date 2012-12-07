@@ -61,7 +61,6 @@ class GroupsController < ApplicationController
 
   def invite
     @group = Group.find(params[:group_id])
-    debugger
     if params[:emails] != ""
       @emails = params[:emails].split(",")
       #check for email validity

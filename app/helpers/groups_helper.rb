@@ -11,6 +11,15 @@ module GroupsHelper
 	end
 
 	def send_invite_emails(group, emails)
+		for email in emails do
+			user = User.find_by_email(email)
+			if user != nil
+				invite = Invite.new(group_id: group.id, host_id: current_user.id, guest_email: user.id)
+				invite.save
+			else #email belongs to non-user
+
+			
+
 		debugger
 		#do stuff here
 	end

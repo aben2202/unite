@@ -121,7 +121,6 @@ class ActivitiesController < ApplicationController
     end
 
     def check_if_its_on(activity)
-      debugger
       if !activity.its_on? && activity.users.count >= activity.min_participants
         activity.update_attributes(its_on: true)
         send_emails_for_its_on(activity)
