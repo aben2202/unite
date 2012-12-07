@@ -43,6 +43,16 @@ module ActivitiesHelper
 		image_tag("#{category.image_path}", height: 35, width: 35, title: "#{category.name}")
 	end
 
+	def get_nav_item_class(item)
+		if params[:controller] == item
+			"active"
+		elsif params[:controller] == "static_pages"
+			if params[:action] == item
+				"active"
+			end
+		end
+	end
+
 	def get_activity_row_class(activity)
 		if activity.its_on? 
 			if activity.users.count < activity.max_participants
