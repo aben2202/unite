@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 			order = ["activities.date_and_time"]
 		end
 
-		@upcoming_activities = Activity.paginate(per_page: 5, page: params[:page]).all(
+		@upcoming_activities = Activity.paginate(per_page: 10, page: params[:page]).all(
 				joins: { :participations => { } }, conditions: conditions, order: order )
 	end
 
