@@ -20,7 +20,11 @@
       <% @user.groups.each do |group| %>
         <% if group.id != 1 %>
     	    <tr class=<%= get_group_row_class(group) %>>
-    	      <td><%= group.name %></td>
+    	      <td><%= group.name %>
+              <% if !group.open_to_public? %>
+                <span class="unbold">(private)</span>
+              <% end %>
+            </td>
             <td>
             	<% if signed_in? && @user == current_user %>
                 <%= form_for(current_user.group_memberships.find_by_group_id(group.id),
