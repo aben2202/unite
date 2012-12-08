@@ -28,10 +28,11 @@ class UserMailer < ActionMailer::Base
   end
 
   def group_invite(email, group)
+    debugger
     @email = email
     @group = group
     @user = User.find_by_email(@email)
 
-    mail to: @email, subject: "You've been invited to join a private group!"
+    mail to: @email, subject: "Private group invitation!"
   end
 end

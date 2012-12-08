@@ -11,6 +11,7 @@ module GroupsHelper
 	end
 
 	def send_invite_emails(group, emails)
+		debugger
 		for email in emails do
 			invite = Invite.new(group_id: group.id, host_id: current_user.id, guest_email: email)
 			invite.save

@@ -73,10 +73,14 @@ class UsersController < ApplicationController
 	end
 
 	def invites
-		@title = "Invites"
-		@user = User.find(params[:id])
-		@section = "invitations"
-		render "show_user_section"
+		if signed_in? && params[:id] == current_user.id
+			@title = "Invites"
+			@user = User.find(params[:id])
+			@section = "invitations"
+			render "show_user_section"
+		else
+			redirect_to root_path
+		end
 	end
 
 	def invite_reply
