@@ -73,7 +73,8 @@ class UsersController < ApplicationController
 	end
 
 	def invites
-		if signed_in? && params[:id] == current_user.id
+		debugger
+		if signed_in? && params[:id].to_i == current_user.id
 			@title = "Invites"
 			@user = User.find(params[:id])
 			@section = "invitations"

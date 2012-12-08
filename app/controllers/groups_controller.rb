@@ -60,7 +60,6 @@ class GroupsController < ApplicationController
   end
 
   def invite
-    debugger
     @group = Group.find(params[:group_id])
     if params[:emails] != ""
       @emails = params[:emails].split(",")

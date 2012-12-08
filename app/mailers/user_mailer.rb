@@ -28,7 +28,6 @@ class UserMailer < ActionMailer::Base
   end
 
   def group_invite(email, group)
-    debugger
     @email = email
     @group = group
     @user = User.find_by_email(@email)
